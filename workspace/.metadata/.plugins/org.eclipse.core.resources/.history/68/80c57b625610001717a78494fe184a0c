@@ -1,0 +1,24 @@
+package Clase1OPP.BuilderExample;
+
+public class SQLConnection implements DBConnectionBuilder{
+
+		private DBConnection sql;
+
+		public SQLConnection() {
+			sql = new DBConnection();
+		}
+
+		public void buildLogIn() {
+			sql.SetUser("AngieCastaneda");
+			sql.SetPassword("pswSQL");
+		}
+
+		/*public void buildConnection() {
+			sql.Connect();
+		}*/
+
+		public DBConnection getConnection() {
+			return sql;
+		}
+
+}

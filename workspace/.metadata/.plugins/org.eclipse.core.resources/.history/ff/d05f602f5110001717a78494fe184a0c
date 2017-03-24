@@ -1,0 +1,26 @@
+package Clase1OPP.BuilderExample;
+
+public class MongoDBConnection implements DBConnectionBuilder{
+
+	private DBConnection mongo;
+
+	public MongoDBConnection() {
+		mongo = new DBConnection();
+	}
+
+	public void buildLogIn() {
+		mongo.SetUser("AngieCastaneda");
+		mongo.SetPassword("pswmongo");
+	}
+
+	public void buildConnection() {
+		mongo.Connect();
+	}
+
+	public DBConnection getConnection() {
+		return mongo;
+	}
+
+}
+
+}

@@ -1,0 +1,29 @@
+package Clase1OPP.BuilderExample;
+
+public class SQLConnection implements DBConnectionBuilder{
+
+		private DBConnection sql;
+
+		public SQLConnection() {
+			sql = new DBConnection();
+		}
+
+		public void buildLogIn() {
+			sql.SetUser("red wine");
+		}
+
+		public void buildConnection() {
+			sql.setMainCourse("pizza");
+		}
+
+		@Override
+		public void buildSide() {
+			meal.setSide("bread");
+		}
+
+		@Override
+		public Meal getMeal() {
+			return meal;
+		}
+
+}
