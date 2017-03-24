@@ -1,0 +1,16 @@
+package Clase1OPP.KeyPointProxy;
+
+public class ProxyDemo {
+
+	public static void main(String[] args) {
+
+		Proxy proxy = new Proxy();
+
+		FastAccessDB fastThing = new FastAccessDB();
+		fastThing.access();
+
+		proxy.sayHello();
+
+	}
+
+}
