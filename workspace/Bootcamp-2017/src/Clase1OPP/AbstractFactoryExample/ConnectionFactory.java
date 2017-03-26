@@ -1,4 +1,4 @@
-package Clase1OPP;
+package Clase1OPP.AbstractFactoryExample;
 
 public class ConnectionFactory extends AbstractFactory{
 		
@@ -18,6 +18,10 @@ public class ConnectionFactory extends AbstractFactory{
          return new SQLConnection3();
       }
       
+      return null;
+   }
+   
+   NoSQLConnection getConnectionNoSQL(String ConnectionType) {
       return null;
    }
 }

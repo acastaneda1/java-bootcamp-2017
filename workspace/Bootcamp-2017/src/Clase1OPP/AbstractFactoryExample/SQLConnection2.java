@@ -1,4 +1,4 @@
-package Clase1OPP;
+package Clase1OPP.AbstractFactoryExample;
 
 public class SQLConnection2 implements SQLConnection{
 	

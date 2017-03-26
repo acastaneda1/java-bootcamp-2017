@@ -1,4 +1,4 @@
-package Clase1OPP;
+package Clase1OPP.SingletonExample;
 
 public class DBConnection {
 
