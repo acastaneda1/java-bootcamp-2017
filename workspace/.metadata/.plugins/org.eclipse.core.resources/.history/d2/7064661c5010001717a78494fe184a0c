@@ -1,9 +1,0 @@
-package Clase1OPP.BuilderExample;
-
-public interface DBConnectionBuilder {
-	
-	public void buildLogIn(String user, String password);
-
-	public void buildConnection();
-
-}

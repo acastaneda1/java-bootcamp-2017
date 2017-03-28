@@ -1,5 +1,0 @@
-package Clase1OPP;
-
-public abstract class AbstractFactory {
-	abstract SQLConnection connect();
-}
