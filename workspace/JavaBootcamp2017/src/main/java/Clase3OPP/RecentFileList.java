@@ -27,7 +27,7 @@ public class RecentFileList {
 				}
 			}else{
 				if(!FileList.contains(file)){
-					FileList.remove(9);
+					FileList.remove(0);
 					FileList.add(0,file);
 				}else{
 					FileList.remove(file);
@@ -35,5 +35,4 @@ public class RecentFileList {
 				}
 			}
 		}
-
 }

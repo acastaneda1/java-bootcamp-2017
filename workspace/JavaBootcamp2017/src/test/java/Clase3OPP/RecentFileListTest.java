@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.Before;
 
-public class RecentFileListTest {
+public class RecentFileListTest  {
 	
 	private RecentFileList recentFileList;
 	
@@ -22,6 +22,7 @@ public class RecentFileListTest {
 		assertTrue(list.isEmpty());
 	}
 	
+	@Test
 	public void WhenAfileIsOpenedItIsAddedToTheRecentFileList(){
 		File file1 = new File("file1");
 		recentFileList.fileOpen(file1);
@@ -29,6 +30,7 @@ public class RecentFileListTest {
 		assertTrue(list.contains(file1));
 	}
 	
+	@Test
 	public void IfOpenedFileExistsInRecentFileListItIsBumpedToTheTopNoDuplicated(){
 		File file1 = new File("file1");
 		recentFileList.fileOpen(file1);
@@ -41,12 +43,13 @@ public class RecentFileListTest {
 		assertTrue(list.indexOf(file1) == 0);
 	}
 	
+	@Test
 	public void IfTheRecentFileListGetsFullTheOldestItemIsRemovedWhenANewItemIsAdded(){
 		File file1 = new File("file1");
 		recentFileList.fileOpen(file1);
 		File file2 = new File("file2");
 		recentFileList.fileOpen(file2);
-		File file3 = new File("file2");
+		File file3 = new File("file3");
 		recentFileList.fileOpen(file3);
 		File file4 = new File("file4");
 		recentFileList.fileOpen(file4);
@@ -74,6 +77,8 @@ public class RecentFileListTest {
 		recentFileList.fileOpen(file15);
 		File file16 = new File("file16");
 		recentFileList.fileOpen(file16);
+		ArrayList<File> list =recentFileList.getList();
+		assertTrue(list.contains(file16));
 	}
 	
 }
