@@ -1,6 +1,6 @@
 package Clase3OPP;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.io.File;
 
 import static org.junit.Assert.*;
@@ -17,21 +17,21 @@ public class RecentFileListTest  {
 	}
 	
 	@Test
-	public void WhenProgramIsRunForTheFirstTime(){
-		ArrayList<File> list = recentFileList.getList();
+	public void whenProgramRunsForTheFirstTimeTheListIsEmpty(){
+		LinkedList<File> list = recentFileList.getList();
 		assertTrue(list.isEmpty());
 	}
 	
 	@Test
-	public void WhenAfileIsOpenedItIsAddedToTheRecentFileList(){
+	public void whenAfileIsOpenedItIsAddedToTheRecentFileList(){
 		File file1 = new File("file1");
 		recentFileList.fileOpen(file1);
-		ArrayList<File> list =recentFileList.getList();
+		LinkedList<File> list = recentFileList.getList();
 		assertTrue(list.contains(file1));
 	}
 	
 	@Test
-	public void IfOpenedFileExistsInRecentFileListItIsBumpedToTheTopNoDuplicated(){
+	public void ifOpenedFileExistsInRecentFileListItIsBumpedToTheTopNoDuplicated(){
 		File file1 = new File("file1");
 		recentFileList.fileOpen(file1);
 		File file2 = new File("file2");
@@ -39,12 +39,12 @@ public class RecentFileListTest  {
 		File file3 = new File("file2");
 		recentFileList.fileOpen(file3);
 		recentFileList.fileOpen(file1);
-		ArrayList<File> list =recentFileList.getList();
+		LinkedList<File> list = recentFileList.getList();
 		assertTrue(list.indexOf(file1) == 0);
 	}
 	
 	@Test
-	public void IfTheRecentFileListGetsFullTheOldestItemIsRemovedWhenANewItemIsAdded(){
+	public void ifTheRecentFileListGetsFullTheOldestItemIsRemovedWhenANewItemIsAdded(){
 		File file1 = new File("file1");
 		recentFileList.fileOpen(file1);
 		File file2 = new File("file2");
@@ -77,8 +77,10 @@ public class RecentFileListTest  {
 		recentFileList.fileOpen(file15);
 		File file16 = new File("file16");
 		recentFileList.fileOpen(file16);
-		ArrayList<File> list =recentFileList.getList();
-		assertTrue(list.contains(file16));
+		File file17 = new File("file17");
+		recentFileList.fileOpen(file17);
+		File file = recentFileList.getFirstElement();
+		assertTrue(file == file17);
 	}
 	
 }
