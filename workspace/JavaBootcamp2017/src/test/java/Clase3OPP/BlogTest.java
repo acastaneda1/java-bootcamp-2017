@@ -9,7 +9,6 @@ import org.easymock.EasyMockRunner;
 import org.easymock.EasyMockSupport;
 import org.easymock.TestSubject;
 import org.easymock.Mock;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.LinkedList;
@@ -83,20 +82,20 @@ public class BlogTest {
 		expect(mocky10.getContent()).andReturn("contentEntry10");
 		expect(mocky11.getContent()).andReturn("contentEntry11");
 		expect(mocky12.getContent()).andReturn("contentEntry12");
-		replay();
 		
-		/*expect(mocky.getViews()).andReturn("contentEntry1");
-		expect(mocky2.getViews()).andReturn("contentEntry2");
-		expect(mocky3.getViews()).andReturn("contentEntry3");
-		expect(mocky4.getViews()).andReturn("contentEntry4");
-		expect(mocky5.getViews()).andReturn("contentEntry5");
-		expect(mocky6.getViews()).andReturn("contentEntry6");
-		expect(mocky7.getViews()).andReturn("contentEntry7");
-		expect(mocky8.getViews()).andReturn("contentEntry8");
-		expect(mocky9.getViews()).andReturn("contentEntry9");
-		expect(mocky10.getViews()).andReturn("contentEntry10");
-		expect(mocky11.getViews()).andReturn("contentEntry11");
-		expect(mocky12.getViews()).andReturn("contentEntry12");*/
+		expect(mocky.getViews()).andReturn(120);
+		expect(mocky2.getViews()).andReturn(200);
+		expect(mocky3.getViews()).andReturn(1);
+		expect(mocky4.getViews()).andReturn(3);
+		expect(mocky5.getViews()).andReturn(81512);
+		expect(mocky6.getViews()).andReturn(32);
+		expect(mocky7.getViews()).andReturn(49);
+		expect(mocky8.getViews()).andReturn(56);
+		expect(mocky9.getViews()).andReturn(35);
+		expect(mocky10.getViews()).andReturn(128);
+		expect(mocky11.getViews()).andReturn(512);
+		expect(mocky12.getViews()).andReturn(1024);
+		replay();
 		
 		blog.postNewEntry(mocky);
 		blog.postNewEntry(mocky2);
@@ -124,5 +123,6 @@ public class BlogTest {
 		List<Entry> posts = blog.showLastEntries(10);
 		System.out.println(posts);
 		assertEquals(posts,testList);
+		verify();
 	}
 }
