@@ -277,6 +277,10 @@ Commit your practice code.
 
 4. [Web Services](https://github.com/ilanrosenfeld7/java-bootcamp-2017/tree/master/Extra%20Material)
 
+5. [Services - Project Architecture](https://github.com/ilanrosenfeld7/java-bootcamp-2017/tree/master/Extra%20Material)
+
+6. [Patterns of Enterprise Application Architecture](https://pdfs.semanticscholar.org/7de2/0692c774798016e06d2eb0ade959c61df350.pdf)
+
 ##### Practice: #####
 
 1. Create a shopping cart API spec
@@ -436,11 +440,13 @@ Commit your practice code.
 ##### Reading: #####
 1. [Introduction to REST](https://www.youtube.com/watch?v=YCcAE2SCQ6k)
 
-2. [Quick development guide](https://spring.io/guides/gs/rest-service/)
+2. [REST](https://github.com/ilanrosenfeld7/java-bootcamp-2017/tree/master/Extra%20Material)
 
-3. [Spring boot - rest services guide](http://spring.io/guides/tutorials/bookmarks/)
+3. [Quick development guide](https://spring.io/guides/gs/rest-service/)
 
-4. [REST API documentation](http://swagger.io/getting-started/)
+4. [Spring boot - rest services guide](http://spring.io/guides/tutorials/bookmarks/)
+
+5. [REST API documentation](http://swagger.io/getting-started/)
   
 ##### Practice: #####
 
