@@ -5,33 +5,33 @@ import java.util.List;
 public class Blog {
 
 	private RecentLists<Entry> entriesList;
-	
-	public Blog(){
+
+	public Blog() {
 		entriesList = new RecentLists<Entry>();
 	}
-	
-	public void postNewEntry(Entry entry){
+
+	public void postNewEntry(Entry entry) {
 		entriesList.addElement(entry);
 	}
-	
-	public void deleteEntry(Entry entry){
-			entriesList.deleteElement(entry);
+
+	public void deleteEntry(Entry entry) {
+		entriesList.deleteElement(entry);
 	}
-	
-	public List<Entry> getEntriesList(){
+
+	public List<Entry> getEntriesList() {
 		return entriesList.getList();
 	}
-	
-	public boolean containEntry(Entry entry){
+
+	public boolean containEntry(Entry entry) {
 		return entriesList.containElement(entry);
 	}
-	
-	public List<Entry> showLastEntries(int maxNumEntries){
-		if(entriesList.getSizeElement()>=maxNumEntries)
-			return entriesList.getLastElements(0,maxNumEntries);
+
+	public List<Entry> showLastEntries(int maxNumEntries) {
+		if (entriesList.getSizeElement() >= maxNumEntries)
+			return entriesList.getLastElements(0, maxNumEntries);
 		else
 			return entriesList.getList();
-		
+
 	}
 
 }

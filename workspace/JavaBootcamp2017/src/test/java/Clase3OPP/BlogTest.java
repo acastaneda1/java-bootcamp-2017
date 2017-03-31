@@ -18,24 +18,24 @@ import java.util.List;
 public class BlogTest {
 
 	@TestSubject
-	private Blog blog = new Blog(); 
+	private Blog blog = new Blog();
 
 	@Mock
-	private Entry mocky; 
+	private Entry mocky;
 
 	@Before
-    public void setUp() {
-        mocky = mock(Entry.class);
-    }
-	
+	public void setUp() {
+		mocky = mock(Entry.class);
+	}
+
 	@Test
 	public void whenPostNewEntryIsAddedToBlog() {
 		blog.postNewEntry(mocky);
 		assertTrue(blog.containEntry(mocky));
 	}
-	
+
 	@Test
-	public void whenDeleteExistingEntryTheEntryIsRemovedFromTheBlog(){
+	public void whenDeleteExistingEntryTheEntryIsRemovedFromTheBlog() {
 		blog.postNewEntry(mocky);
 		Entry mocky2 = mock(Entry.class);
 		Entry mocky3 = mock(Entry.class);
@@ -43,9 +43,9 @@ public class BlogTest {
 		blog.deleteEntry(mocky);
 		assertFalse(blog.containEntry(mocky));
 	}
-	
+
 	@Test
-	public void whenDeleteNoExistingEntryTheEntryIsRemovedFromTheBlog(){
+	public void whenDeleteNoExistingEntryTheEntryIsRemovedFromTheBlog() {
 		blog.postNewEntry(mocky);
 		Entry mocky2 = mock(Entry.class);
 		Entry mocky3 = mock(Entry.class);
@@ -53,10 +53,10 @@ public class BlogTest {
 		blog.deleteEntry(mocky3);
 		assertFalse(blog.containEntry(mocky3));
 	}
-	
+
 	@Test
-	public void whenShowTenMostRecentEntriesTheLastTenEntriesReturned(){
-		
+	public void whenShowTenMostRecentEntriesTheLastTenEntriesReturned() {
+
 		LinkedList<Entry> testList = new LinkedList<Entry>();
 		Entry mocky2 = mock(Entry.class);
 		Entry mocky3 = mock(Entry.class);
@@ -69,7 +69,7 @@ public class BlogTest {
 		Entry mocky10 = mock(Entry.class);
 		Entry mocky11 = mock(Entry.class);
 		Entry mocky12 = mock(Entry.class);
-		
+
 		expect(mocky.getContent()).andReturn("contentEntry1");
 		expect(mocky2.getContent()).andReturn("contentEntry2");
 		expect(mocky3.getContent()).andReturn("contentEntry3");
@@ -82,7 +82,7 @@ public class BlogTest {
 		expect(mocky10.getContent()).andReturn("contentEntry10");
 		expect(mocky11.getContent()).andReturn("contentEntry11");
 		expect(mocky12.getContent()).andReturn("contentEntry12");
-		
+
 		expect(mocky.getViews()).andReturn(120);
 		expect(mocky2.getViews()).andReturn(200);
 		expect(mocky3.getViews()).andReturn(1);
@@ -96,7 +96,7 @@ public class BlogTest {
 		expect(mocky11.getViews()).andReturn(512);
 		expect(mocky12.getViews()).andReturn(1024);
 		replay();
-		
+
 		blog.postNewEntry(mocky);
 		blog.postNewEntry(mocky2);
 		blog.postNewEntry(mocky3);
@@ -109,7 +109,7 @@ public class BlogTest {
 		blog.postNewEntry(mocky10);
 		blog.postNewEntry(mocky11);
 		blog.postNewEntry(mocky12);
-		
+
 		testList.addFirst(mocky3);
 		testList.addFirst(mocky4);
 		testList.addFirst(mocky5);
@@ -122,7 +122,7 @@ public class BlogTest {
 		testList.addFirst(mocky12);
 		List<Entry> posts = blog.showLastEntries(10);
 		System.out.println(posts);
-		assertEquals(posts,testList);
+		assertEquals(posts, testList);
 		verify();
 	}
 }

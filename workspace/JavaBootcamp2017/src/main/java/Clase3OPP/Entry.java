@@ -1,23 +1,22 @@
 package Clase3OPP;
 
-
 public class Entry {
-	
+
 	private String content;
 	private int views;
-	
-	public Entry(){		
+
+	public Entry() {
 	}
-	
-	public String getContent(){
+
+	public String getContent() {
 		return content;
 	}
-	
-	public void setContent(String contentChanged){
+
+	public void setContent(String contentChanged) {
 		content = contentChanged;
 	}
-	
-	public int getViews(){
+
+	public int getViews() {
 		return views;
 	}
 }

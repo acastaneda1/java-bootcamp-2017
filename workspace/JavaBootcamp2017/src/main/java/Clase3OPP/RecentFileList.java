@@ -26,9 +26,10 @@ public class RecentFileList {
 		public File getFirstElement(){
 			return fileList.getFirst();
 		}
-		public void addFile(File file){
-			if(fileList.contains(file))
-				fileList.remove(file);
-			fileList.addFirst(file);
-		}
+
+	public void addFile(File file) {
+		if (fileList.contains(file))
+			fileList.remove(file);
+		fileList.addFirst(file);
+	}
 }
