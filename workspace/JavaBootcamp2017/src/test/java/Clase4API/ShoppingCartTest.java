@@ -106,7 +106,7 @@ public class ShoppingCartTest {
 	}
 
 	@Test
-	public void whenUserBuyItShowsTotalPriceMessage() {
+	public void whenUserBuyItShowsTotalPriceMessageAndPaymentMethodMessage() {
 		Item mockItem2 = mock(Item.class);
 		Item mockItem3 = mock(Item.class);
 		Item mockItem4 = mock(Item.class);
@@ -137,7 +137,8 @@ public class ShoppingCartTest {
 		shoppingCar.addItem(mockItem2);
 		shoppingCar.addItem(mockItem3);
 		shoppingCar.addItem(mockItem4);
-
-		assertEquals(shoppingCar.buy(), 160);
+		
+		int total = shoppingCar.buy(new CashPayment());		
+		assertEquals(total, 160);
 	}
 }

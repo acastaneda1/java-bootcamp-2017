@@ -7,9 +7,15 @@ import java.util.Iterator;
 public class ShoppingCart implements ShoppingCartAPI {
 
 	private LinkedList<Item> shoppingCar;
+	private User user;
 
 	public ShoppingCart() {
 		shoppingCar = new LinkedList<Item>();
+	}
+	
+	@Override
+	public void setCartUser(User userA){
+		this.user = userA; 
 	}
 
 	@Override
@@ -58,16 +64,17 @@ public class ShoppingCart implements ShoppingCartAPI {
 	}
 
 	@Override
-	public int buy() {
+	public int buy(Payment paymentOption) {
 
 		int totalPrice = resumeTotal();
+		System.out.println("El precio a pagar es :" + totalPrice);
+		if (!paymentOption.buyNow(user, shoppingCar, totalPrice))
+			System.out.println("La compra no puedo ser realizada por el metodo seleccionado");
 		/*
 		 * Iterator<Item> it = getItems().listIterator(); while (it.hasNext()) {
 		 * Item item = it.next(); System.out.println(item.getItemId() + " " +
 		 * item.getItemDescription() + " " + item.getItemPrice()); }
 		 */
-
-		System.out.println("El precio a pagar es :" + totalPrice);
 		return totalPrice;
 	}
 }

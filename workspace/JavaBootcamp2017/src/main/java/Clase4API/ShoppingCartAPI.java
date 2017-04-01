@@ -4,7 +4,12 @@ import java.util.LinkedList;
 
 public interface ShoppingCartAPI {
 
-	/* 
+	/*
+	 * This method receive an user and it is set in the shoppingCart object
+	 */
+	public void setCartUser(User user);
+
+	/*
 	 * This method receive an Item and it is added to the shopping cart
 	 */
 	public void addItem(Item item);
@@ -22,18 +27,19 @@ public interface ShoppingCartAPI {
 	 */
 	public LinkedList<Item> getItems();
 
-	/* 
-	 * This method return the total of all the items' prices 
+	/*
+	 * This method return the total of all the items' prices
 	 */
 	public int resumeTotal();
 
-	/* 
-	 * This method removes all the items contained in the shopping cart 
+	/*
+	 * This method removes all the items contained in the shopping cart
 	 */
 	public void clearShoppingCart();
 
 	/*
-	 * This method use the rresumeTotal method and returns the total of the buy
+	 * This method use the resumeTotal method and returns the total of the buy
+	 * the Payment option is selected and implemented
 	 */
-	public int buy();
+	public int buy(Payment paymentOption);
 }
