@@ -22,10 +22,12 @@ public class ShoppingCartTest {
 
 	@Mock
 	private Item mockItem;
-
+	private User mockUser;
+	
 	@Before
 	public void setUp() {
 		mockItem = mock(Item.class);
+		mockUser = mock(User.class);
 		shoppingCar = ShoppingCartFactory.getLocalShoppingCart();
 	}
 
