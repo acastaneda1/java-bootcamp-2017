@@ -11,7 +11,13 @@ public interface Payment {
 	public boolean buyNow(User user, LinkedList<Item> shoppingCar, double total);
 
 	/*
-	 * This Method returns the total amount for each payment method
+	 * This method returns the total amount for each payment method
 	 */
 	public double getAmount();
+
+	/*
+	 * This method returns the unique identification number to each payment
+	 * transaction
+	 */
+	public int getIdTransaction();
 }

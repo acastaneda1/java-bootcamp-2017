@@ -8,6 +8,11 @@ public class CreditCardPayment implements Payment {
 	private int creditCardNumber;
 	private double amount;
 	private double percentageDiscount;
+	private int transactionId;
+
+	public CreditCardPayment() {
+		transactionId = new Counter().getIDTransaction();
+	}
 
 	@Override
 	public boolean buyNow(User user, LinkedList<Item> shoppingCar, double total) {
@@ -16,8 +21,17 @@ public class CreditCardPayment implements Payment {
 		setUserCCNumber(user.getUserCCNumber());
 		setPercentageDiscount(0.1);
 		setAmount(total * (1 - percentageDiscount));
-		System.out.println("La compra se realiza por tarjeta de credito y tiene descuento del 10%.");
+		System.out.println("La compra No." + transactionId + " se realiza por tarjeta de credito y tiene descuento del 10%.");
 		return true;
+	}
+
+	public void setIdTransaction(int newId) {
+		this.transactionId = newId;
+	}
+
+	@Override
+	public int getIdTransaction() {
+		return transactionId;
 	}
 
 	public void setUserName(String userName) {

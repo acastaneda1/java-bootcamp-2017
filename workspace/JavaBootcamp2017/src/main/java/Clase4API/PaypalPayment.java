@@ -8,6 +8,11 @@ public class PaypalPayment implements Payment {
 	private String email;
 	private String password;
 	private double amount;
+	private int transactionId;
+
+	public PaypalPayment() {
+		transactionId = new Counter().getIDTransaction();
+	}
 
 	@Override
 	public boolean buyNow(User user, LinkedList<Item> shoppingCar, double total) {
@@ -17,8 +22,18 @@ public class PaypalPayment implements Payment {
 		double cheapOne = getCheapestItem(shoppingCar);
 		System.out.println(cheapOne);
 		setAmount(total - cheapOne);
-		System.out.println("La compra se realiza por Paypal y tiene descuento: No se cobra el item de menor valor.");
+		System.out
+				.println("La compra No." + transactionId + " se realiza por Paypal y tiene descuento: No se cobra el item de menor valor.");
 		return true;
+	}
+
+	public void setIdTransaction(int newId) {
+		this.transactionId = newId;
+	}
+
+	@Override
+	public int getIdTransaction() {
+		return transactionId;
 	}
 
 	public void setUserEmail(String emailUser) {
