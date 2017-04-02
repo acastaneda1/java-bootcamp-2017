@@ -12,10 +12,10 @@ public class ShoppingCart implements ShoppingCartAPI {
 	public ShoppingCart() {
 		shoppingCar = new LinkedList<Item>();
 	}
-	
+
 	@Override
-	public void setCartUser(User userA){
-		this.user = userA; 
+	public void setCartUser(User userA) {
+		this.user = userA;
 	}
 
 	@Override
@@ -38,7 +38,6 @@ public class ShoppingCart implements ShoppingCartAPI {
 
 	}
 
-	
 	public boolean containItem(Item item) {
 		if (shoppingCar.contains(item))
 			return true;
@@ -47,7 +46,7 @@ public class ShoppingCart implements ShoppingCartAPI {
 	}
 
 	@Override
-	public int resumeTotal() {
+	public double resumeTotal() {
 
 		int totalPrice = 0;
 		Iterator<Item> it = getItems().listIterator();
@@ -64,12 +63,21 @@ public class ShoppingCart implements ShoppingCartAPI {
 	}
 
 	@Override
-	public int buy(Payment paymentOption) {
+	public double buy(Payment paymentOption) {
 
-		int totalPrice = resumeTotal();
-		System.out.println("El precio a pagar es :" + totalPrice);
-		if (!paymentOption.buyNow(user, shoppingCar, totalPrice))
+		double totalPrice = 0;
+		double subtotal = resumeTotal();
+		System.out.println("El precio a pagar es: " + subtotal);
+		System.out.println(shoppingCar.getFirst().getItemPrice());
+		boolean success = paymentOption.buyNow(user, shoppingCar, subtotal);
+
+		if (!success)
 			System.out.println("La compra no puedo ser realizada por el metodo seleccionado");
+		else {
+			totalPrice = paymentOption.getAmount();
+			System.out.println("Por ende el valor final de su compra fue: " + totalPrice);
+		}
+
 		/*
 		 * Iterator<Item> it = getItems().listIterator(); while (it.hasNext()) {
 		 * Item item = it.next(); System.out.println(item.getItemId() + " " +

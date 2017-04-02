@@ -6,15 +6,17 @@ public class CreditCardPayment implements Payment {
 
 	private String name;
 	private int creditCardNumber;
-	private int amount;
+	private double amount;
+	private double percentageDiscount;
 
 	@Override
-	public boolean buyNow(User user, LinkedList<Item> shoppingCar, int total) {
+	public boolean buyNow(User user, LinkedList<Item> shoppingCar, double total) {
 
 		setUserName(user.getUserName());
 		setUserCCNumber(user.getUserCCNumber());
-		setAmount(total);
-		System.out.println("La compra se realiza por tarjeta de credito");
+		setPercentageDiscount(0.1);
+		setAmount(total * (1 - percentageDiscount));
+		System.out.println("La compra se realiza por tarjeta de credito y tiene descuento del 10%.");
 		return true;
 	}
 
@@ -34,11 +36,20 @@ public class CreditCardPayment implements Payment {
 		return creditCardNumber;
 	}
 
-	public void setAmount(int totalPrice) {
+	public void setAmount(double totalPrice) {
 		this.amount = totalPrice;
 	}
 
-	public int getAmount() {
+	@Override
+	public double getAmount() {
+		return amount;
+	}
+
+	public void setPercentageDiscount(double discount) {
+		this.percentageDiscount = discount;
+	}
+
+	public double getPercentageDiscount() {
 		return amount;
 	}
 }

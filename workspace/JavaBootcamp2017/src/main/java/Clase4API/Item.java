@@ -3,10 +3,10 @@ package Clase4API;
 public class Item {
 
 	private String id;
-	private int price;
+	private double price;
 	private String description;
 
-	public Item(String itemId, int itemPrice, String itemDescription) {
+	public Item(String itemId, double itemPrice, String itemDescription) {
 		id = itemId;
 		price = itemPrice;
 		description = itemDescription;
@@ -20,11 +20,11 @@ public class Item {
 		return id;
 	}
 
-	public int getItemPrice() {
+	public double getItemPrice() {
 		return price;
 	}
 
-	public void setItemPrice(int newValue) {
+	public void setItemPrice(double newValue) {
 		price = newValue;
 	}
 

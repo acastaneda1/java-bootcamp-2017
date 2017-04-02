@@ -5,6 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.easymock.EasyMock.*;
+
+import org.easymock.Capture;
 import org.easymock.EasyMockRunner;
 import org.easymock.EasyMockSupport;
 import org.easymock.TestSubject;
@@ -23,7 +25,7 @@ public class ShoppingCartTest {
 	@Mock
 	private Item mockItem;
 	private User mockUser;
-	
+
 	@Before
 	public void setUp() {
 		mockItem = mock(Item.class);
@@ -87,10 +89,10 @@ public class ShoppingCartTest {
 		Item mockItem3 = mock(Item.class);
 		Item mockItem4 = mock(Item.class);
 
-		expect(mockItem.getItemPrice()).andReturn(20);
-		expect(mockItem2.getItemPrice()).andReturn(55);
-		expect(mockItem3.getItemPrice()).andReturn(75);
-		expect(mockItem4.getItemPrice()).andReturn(10);
+		expect(mockItem.getItemPrice()).andReturn(20.0);
+		expect(mockItem2.getItemPrice()).andReturn(55.0);
+		expect(mockItem3.getItemPrice()).andReturn(75.0);
+		expect(mockItem4.getItemPrice()).andReturn(10.0);
 
 		replay(mockItem);
 		replay(mockItem2);
@@ -102,7 +104,7 @@ public class ShoppingCartTest {
 		shoppingCar.addItem(mockItem3);
 		shoppingCar.addItem(mockItem4);
 
-		assertEquals(shoppingCar.resumeTotal(), 160);
+		assertTrue(shoppingCar.resumeTotal() == 160.0);
 	}
 
 	@Test
@@ -111,10 +113,10 @@ public class ShoppingCartTest {
 		Item mockItem3 = mock(Item.class);
 		Item mockItem4 = mock(Item.class);
 
-		expect(mockItem.getItemPrice()).andReturn(20);
-		expect(mockItem2.getItemPrice()).andReturn(55);
-		expect(mockItem3.getItemPrice()).andReturn(75);
-		expect(mockItem4.getItemPrice()).andReturn(10);
+		expect(mockItem.getItemPrice()).andReturn(20.0);
+		expect(mockItem2.getItemPrice()).andReturn(55.0);
+		expect(mockItem3.getItemPrice()).andReturn(75.0);
+		expect(mockItem4.getItemPrice()).andReturn(10.0);
 
 		/*
 		 * expect(mockItem.getItemId()).andReturn("1");
@@ -137,8 +139,91 @@ public class ShoppingCartTest {
 		shoppingCar.addItem(mockItem2);
 		shoppingCar.addItem(mockItem3);
 		shoppingCar.addItem(mockItem4);
-		
-		int total = shoppingCar.buy(new CashPayment());		
-		assertEquals(total, 160);
+
+		double total = shoppingCar.buy(new CashPayment());
+		assertTrue(total == 160.0);
+	}
+
+	@Test
+	public void whenUserBuyByCreditCardIsApliedTheTenPercentDiscountOverThePurchase() {
+		expect(mockUser.getUserName()).andReturn("UserName1");
+		expect(mockUser.getUserCCNumber()).andReturn(445566778);
+
+		replay(mockUser);
+
+		Item mockItem2 = mock(Item.class);
+		Item mockItem3 = mock(Item.class);
+
+		expect(mockItem.getItemPrice()).andReturn(20.0);
+		expect(mockItem2.getItemPrice()).andReturn(55.0);
+		expect(mockItem3.getItemPrice()).andReturn(75.0);
+
+		replay(mockItem);
+		replay(mockItem2);
+		replay(mockItem3);
+
+		shoppingCar.addItem(mockItem);
+		shoppingCar.addItem(mockItem2);
+		shoppingCar.addItem(mockItem3);
+
+		shoppingCar.setCartUser(mockUser);
+		CreditCardPayment creditCardPayment = new CreditCardPayment();
+		shoppingCar.buy(creditCardPayment);
+		double total = creditCardPayment.getAmount();
+		assertTrue(total == 135.0);
+	}
+
+	@Test
+	public void whenUserBuyByPaypalTheCheapestItemIsForFree() {
+		expect(mockUser.getUserEmail()).andReturn("UserName1@123.ar");
+		expect(mockUser.getUserPassword()).andReturn("1234RFV");
+
+		replay(mockUser);
+
+		Item mockItem2 = mock(Item.class);
+		Item mockItem3 = mock(Item.class);
+
+		expect(mockItem.getItemPrice()).andReturn(20.0);
+		expect(mockItem2.getItemPrice()).andReturn(30.0);
+		expect(mockItem3.getItemPrice()).andReturn(30.0);
+
+		replay(mockItem);
+		replay(mockItem2);
+		replay(mockItem3);
+
+		shoppingCar.addItem(mockItem);
+		shoppingCar.addItem(mockItem2);
+		shoppingCar.addItem(mockItem3);
+
+		shoppingCar.setCartUser(mockUser);
+		PaypalPayment paypalPayment = new PaypalPayment();
+		shoppingCar.buy(paypalPayment);
+		double total = paypalPayment.getAmount();
+		assertTrue(total == 60.0);
+	}
+
+	@Test
+	public void whenUserBuyByCashTheMoreExpensiveItemIsNinetyPercentOfItsPrice() {
+
+		Item mockItem2 = mock(Item.class);
+		Item mockItem3 = mock(Item.class);
+
+		expect(mockItem.getItemPrice()).andReturn(20.0);
+		expect(mockItem2.getItemPrice()).andReturn(30.0);
+		expect(mockItem3.getItemPrice()).andReturn(30.0);
+
+		replay(mockItem);
+		replay(mockItem2);
+		replay(mockItem3);
+
+		shoppingCar.addItem(mockItem);
+		shoppingCar.addItem(mockItem2);
+		shoppingCar.addItem(mockItem3);
+
+		shoppingCar.setCartUser(mockUser);
+		CashPayment cashPayment = new CashPayment();
+		shoppingCar.buy(cashPayment);
+		double total = cashPayment.getAmount();
+		assertTrue(total == 60.0);
 	}
 }

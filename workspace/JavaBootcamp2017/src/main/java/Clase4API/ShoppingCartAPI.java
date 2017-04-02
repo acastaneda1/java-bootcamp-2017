@@ -30,7 +30,7 @@ public interface ShoppingCartAPI {
 	/*
 	 * This method return the total of all the items' prices
 	 */
-	public int resumeTotal();
+	public double resumeTotal();
 
 	/*
 	 * This method removes all the items contained in the shopping cart
@@ -41,5 +41,5 @@ public interface ShoppingCartAPI {
 	 * This method use the resumeTotal method and returns the total of the buy
 	 * the Payment option is selected and implemented
 	 */
-	public int buy(Payment paymentOption);
+	public double buy(Payment paymentOption);
 }
