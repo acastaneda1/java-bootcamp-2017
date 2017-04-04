@@ -1,6 +1,9 @@
-package Clase4API;
+package Clase4API.Service;
 
 import java.util.LinkedList;
+
+import Clase4API.ServiceImp.Item;
+import Clase4API.ServiceImp.User;
 
 public interface ShoppingCartAPI {
 

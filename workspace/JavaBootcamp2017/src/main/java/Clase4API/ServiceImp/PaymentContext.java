@@ -1,6 +1,8 @@
-package Clase4API;
+package Clase4API.ServiceImp;
 
 import java.util.LinkedList;
+
+import Clase4API.Service.Payment;
 
 public class PaymentContext {
 

@@ -1,0 +1,150 @@
+
+********** Base de Datos High_school***********
+
+-------------------------------------------------
+*						*
+*		Student Table			*			
+*						*
+-------------------------------------------------
+
+CREATE TABLE `high_school`.`Student` (
+ `First_name` VARCHAR(25) NOT NULL , 
+`Last_name` VARCHAR(25) NOT NULL , 
+`Registration_number` INT(10) NOT NULL , 
+`Date_of_birth` DATE NOT NULL , 
+PRIMARY KEY (`Registration_number`)) ENGINE = InnoDB;
+
+
+INSERT INTO `student` (`First_name`, `Last_name`, `Registration_number`, `Date_of_birth`) VALUES 
+('Juan ', 'Perez', '1234567', '1990-04-02'), 
+('Jorge', 'Ramirez', '4562344', '1960-09-30'), 
+('Jeronimo', 'Peñalosa', '3216544', '1980-04-02'),
+('Kenia', 'Vivas', '19901302', '1990-03-05'), 
+('Veronica', 'Alvear', '1980235', '1980-12-12'), 
+('Alejandra', 'Munevar', '19961208', '1996-12-08'), 
+('Johana', 'Campuzano', '19901552', '1990-12-08'), 
+('Neli', 'Gomez', '196000', '1960-10-10'), 
+('Juan', 'Manuel', '7898761', '1987-12-08'), 
+('Alejandro', 'Gomez', '145698', '1990-05-13'), 
+('Veronica', 'Espinoza', '5555667', '1995-11-12'), 
+('Nala', 'Castellanos', '19882312', '1990-07-07'), 
+('Sophia', 'Pinares', '19902302', '1988-05-05');
+
+-------------------------------------------------
+*						*
+*		Teacher Table			*			
+*						*
+-------------------------------------------------
+
+CREATE TABLE `high_school`.`Teacher` (
+ `First_name` VARCHAR(25) NOT NULL , 
+`Last_name` VARCHAR(25) NOT NULL , 
+`Date_of_birth` DATE NOT NULL , 
+`Registration_number` INT(10) NOT NULL , 
+PRIMARY KEY (`Registration_number`)) ENGINE = InnoDB;
+
+INSERT INTO `teacher` (`First_name`, `Last_name`, `Date_of_birth`, `Registration_number`) VALUES 
+('Rodrigo', 'Casale', '1988-12-31', '57678987'), 
+('Francisco', 'Corredor', '1952-03-09', '12348765'), 
+('Rafael', 'Pehna', '1932-09-09', '12345');
+
+-------------------------------------------------
+*						*
+*		Course Table			*			
+*						*
+-------------------------------------------------
+
+CREATE TABLE `high_school`.`Course` ( 
+`Name` VARCHAR(25) NOT NULL , 
+`Assigned_teacher` INT(10) NOT NULL , 
+`hours_per_week` INT NOT NULL , 
+`Schedule_time` VARCHAR(25) NOT NULL , 
+`Id_course` INT NOT NULL , 
+PRIMARY KEY (`Id_course`), 
+INDEX (`Assigned_teacher`)) ENGINE = InnoDB;
+
+
+INSERT INTO `course` (`Name`, `Assigned_teacher`, `hours_per_week`, `Schedule_time`, `Id_course`) VALUES 
+('Java Bootcamp', '12345', '10', 'lun-vie 3-4 pm', '1'), 
+('Electronica de potencia', '12348765', '50', 'vie 1-7 pm', '2'), 
+('Digitales I', '12348765', '40', 'mar 1-3 pm', '3');
+
+ADD CONSTRAINT `course_ibfk_1` FOREIGN KEY (`Assigned_Teacher`) REFERENCES `teacher (`Registration_number`);
+
+-------------------------------------------------
+*						*
+*		Grades Table			*			
+*						*
+-------------------------------------------------
+
+CREATE TABLE `high_school`.`Grades` ( 
+`Student` INT(10) NOT NULL , 
+`Course` INT(10) NOT NULL , 
+`Partial_Note1` INT NOT NULL , 
+`Partial_Note2` INT NOT NULL , 
+`Partial_Note3` INT NOT NULL , 
+`Final_Exam` INT NOT NULL , 
+INDEX (`Student`), 
+INDEX (`Course`)) ENGINE = InnoDB;
+
+INSERT INTO `grades` (`Student`, `Course`, `Partial_Note1`, `Partial_Note2`, `Partial_Note3`, `Final_Exam`) VALUES 
+('145698', '1', '10', '10', '9', '9'), 
+('196000', '1', '8', '8', '8', '8'), 
+('1234567', '1', '9', '8', '8', '8'), 
+('1980234', '1', '9', '9', '7', '8'), 
+('3216544', '1', '8', '7', '7', '7'), 
+('4562344', '1', '8', '5', '5', '8'), 
+('5555667', '1', '3', '2', '5', '8'), 
+('7898761', '1', '8', '8', '8', '8'),
+('19882312', '1', '8', '8', '8', '8'),
+('19901302', '1', '8', '2', '3', '4'),
+('19901552', '1', '2', '5', '8', '8'),
+('19902302', '1', '9', '9', '1', '8'),
+('19961208', '1', '8', '8', '10', '10'),
+('145698', '2', '10', '10', '9', '9'), 
+('196000', '2', '8', '8', '8', '8'), 
+('1234567', '2', '9', '8', '8', '8'), 
+('1980234', '2', '9', '9', '7', '8'), 
+('3216544', '2', '8', '7', '7', '7'), 
+('4562344', '2', '8', '5', '5', '8'), 
+('5555667', '2', '3', '2', '5', '8'), 
+('7898761', '2', '8', '8', '8', '8'),
+('19882312', '2', '8', '8', '8', '8'),
+('19901302', '2', '8', '2', '3', '4'),
+('19901552', '3', '2', '5', '8', '8'),
+('19902302', '3', '9', '9', '1', '8'),
+('19961208', '3', '8', '8', '10', '10'), 
+('145698', '3', '10', '10', '9', '9'), 
+('196000', '3', '8', '8', '8', '8'), 
+('1234567', '3', '9', '8', '8', '8'), 
+('1980234', '3', '9', '9', '7', '8'), 
+('3216544', '3', '8', '7', '7', '7'), 
+('4562344', '3', '8', '5', '5', '8'), 
+('5555667', '3', '3', '2', '5', '8'), 
+('7898761', '3', '8', '8', '8', '8'),
+('19882312', '3', '8', '8', '8', '8'),
+('19901302', '3', '8', '3', '3', '4');
+
+ADD CONSTRAINT `grades_ibfk_1` FOREIGN KEY (`Student`) REFERENCES `student` (`Registration_number`);
+ADD CONSTRAINT `grades_ibfk_2` FOREIGN KEY (`Course`) REFERENCES `course` (`Id_course`);
+
+____________________________________________________________________________________________________
+
+Showing a list students and teachers for a given course. The output format should be:
+
+ Course: <course-name>
+ Teacher: <last-name>, <first-name>
+ Students:
+   <last-name>, <first-name> (ordered by alphabetically by last name)
+
+Query:
+
+SELECT `c`.name AS course , 
+	CONCAT(`t`.first_name, ' ', `t`.last_name) AS Teacher, 
+	CONCAT(`s`.first_name, ' ', `s`.last_name) AS Student 
+FROM `course` AS `c` 
+	INNER JOIN `teacher` AS `t` ON (`c`.assigned_teacher = `t`.registration_number) 
+	INNER JOIN `grades` AS `g` ON (`c`.id_course = `g`.course) 
+	INNER JOIN `student` AS `s` ON (`g`.student = `s`.registration_number) 
+ORDER BY `s`.last_name ASC
+

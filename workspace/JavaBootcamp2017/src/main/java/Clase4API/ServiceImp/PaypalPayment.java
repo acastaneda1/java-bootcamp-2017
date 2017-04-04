@@ -1,6 +1,9 @@
-package Clase4API;
+package Clase4API.ServiceImp;
 
 import java.util.LinkedList;
+
+import Clase4API.Service.Payment;
+
 import java.util.Iterator;
 
 public class PaypalPayment implements Payment {
@@ -20,10 +23,8 @@ public class PaypalPayment implements Payment {
 		setUserPassword(user.getUserPassword());
 		setUserEmail(user.getUserEmail());
 		double cheapOne = getCheapestItem(shoppingCar);
-		System.out.println(cheapOne);
 		setAmount(total - cheapOne);
-		System.out
-				.println("La compra No." + transactionId + " se realiza por Paypal y tiene descuento: No se cobra el item de menor valor.");
+		System.out.println("La compra No." + transactionId + " se realiza por Paypal y tiene descuento: No se cobra el producto de menor valor.");
 		return true;
 	}
 
@@ -63,11 +64,10 @@ public class PaypalPayment implements Payment {
 
 	public double getCheapestItem(LinkedList<Item> shoppingCar) {
 
-		double minimumPrice = 0;
+		double minimumPrice = shoppingCar.get(0).getItemPrice();
 		Iterator<Item> it = shoppingCar.listIterator();
 		while (it.hasNext()) {
 			Item item = it.next();
-			System.out.println(item.getItemPrice());
 			if (item.getItemPrice() <= minimumPrice) {
 				minimumPrice = item.getItemPrice();
 			}

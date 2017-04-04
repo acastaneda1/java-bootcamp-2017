@@ -13,6 +13,13 @@ import org.easymock.TestSubject;
 import org.easymock.Mock;
 import org.junit.runner.RunWith;
 
+import Clase4API.ServiceImp.CashPayment;
+import Clase4API.ServiceImp.CreditCardPayment;
+import Clase4API.ServiceImp.Item;
+import Clase4API.ServiceImp.PaypalPayment;
+import Clase4API.ServiceImp.ShoppingCart;
+import Clase4API.ServiceImp.User;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,24 +30,23 @@ public class ShoppingCartTest {
 	ShoppingCart shoppingCar = ShoppingCartFactory.getLocalShoppingCart();
 
 	@Mock
-	private Item mockItem;
 	private User mockUser;
 
 	@Before
 	public void setUp() {
-		mockItem = mock(Item.class);
-		mockUser = mock(User.class);
 		shoppingCar = ShoppingCartFactory.getLocalShoppingCart();
 	}
 
 	@Test
 	public void whenAddAnItemIsAddedToShoppingCart() {
+		Item mockItem = mock(Item.class);
 		shoppingCar.addItem(mockItem);
 		assertTrue(shoppingCar.containItem(mockItem));
 	}
 
 	@Test
 	public void whenRemoveAnItemIsRemovedToShoppingCart() {
+		Item mockItem = mock(Item.class);
 		shoppingCar.addItem(mockItem);
 		shoppingCar.removeItem(mockItem);
 		assertFalse(shoppingCar.containItem(mockItem));
@@ -48,6 +54,7 @@ public class ShoppingCartTest {
 
 	@Test
 	public void whenRemoveAnRemovedItemItGivesUserErrorMesage() {
+		Item mockItem = mock(Item.class);
 		shoppingCar.addItem(mockItem);
 		shoppingCar.removeItem(mockItem);
 		assertFalse(shoppingCar.containItem(mockItem));
@@ -57,6 +64,7 @@ public class ShoppingCartTest {
 
 	@Test
 	public void whenGetShoppingCartFullItGivesAllItemsInTheShoppingCart() {
+		Item mockItem = mock(Item.class);
 		Item mockItem2 = mock(Item.class);
 		Item mockItem3 = mock(Item.class);
 		Item mockItem4 = mock(Item.class);
@@ -75,6 +83,7 @@ public class ShoppingCartTest {
 
 	@Test
 	public void whenClearShoppingCartItRemoveAllItemsFromShoppingCar() {
+		Item mockItem = mock(Item.class);
 		Item mockItem2 = mock(Item.class);
 		shoppingCar.addItem(mockItem);
 		shoppingCar.addItem(mockItem2);
@@ -84,7 +93,7 @@ public class ShoppingCartTest {
 
 	@Test
 	public void whenResumeTheTotalItTotalizeAllItemsInShoppingCar() {
-
+		Item mockItem = mock(Item.class);
 		Item mockItem2 = mock(Item.class);
 		Item mockItem3 = mock(Item.class);
 		Item mockItem4 = mock(Item.class);
@@ -109,14 +118,15 @@ public class ShoppingCartTest {
 
 	@Test
 	public void whenUserBuyItShowsTotalPriceMessageAndPaymentMethodMessage() {
+		Item mockItem = mock(Item.class);
 		Item mockItem2 = mock(Item.class);
 		Item mockItem3 = mock(Item.class);
 		Item mockItem4 = mock(Item.class);
 
-		expect(mockItem.getItemPrice()).andReturn(20.0);
-		expect(mockItem2.getItemPrice()).andReturn(55.0);
-		expect(mockItem3.getItemPrice()).andReturn(75.0);
-		expect(mockItem4.getItemPrice()).andReturn(10.0);
+		expect(mockItem.getItemPrice()).andReturn(20.0).times(5);
+		expect(mockItem2.getItemPrice()).andReturn(55.0).times(5);
+		expect(mockItem3.getItemPrice()).andReturn(75.0).times(5);
+		expect(mockItem4.getItemPrice()).andReturn(10.0).times(5);
 
 		/*
 		 * expect(mockItem.getItemId()).andReturn("1");
@@ -141,7 +151,7 @@ public class ShoppingCartTest {
 		shoppingCar.addItem(mockItem4);
 
 		double total = shoppingCar.buy(new CashPayment());
-		assertTrue(total == 160.0);
+		assertTrue(total == 92.5);
 	}
 
 	@Test
@@ -151,12 +161,13 @@ public class ShoppingCartTest {
 
 		replay(mockUser);
 
+		Item mockItem = mock(Item.class);
 		Item mockItem2 = mock(Item.class);
 		Item mockItem3 = mock(Item.class);
 
-		expect(mockItem.getItemPrice()).andReturn(20.0);
-		expect(mockItem2.getItemPrice()).andReturn(55.0);
-		expect(mockItem3.getItemPrice()).andReturn(75.0);
+		expect(mockItem.getItemPrice()).andReturn(20.0).times(5);
+		expect(mockItem2.getItemPrice()).andReturn(55.0).times(5);
+		expect(mockItem3.getItemPrice()).andReturn(75.0).times(5);
 
 		replay(mockItem);
 		replay(mockItem2);
@@ -180,12 +191,13 @@ public class ShoppingCartTest {
 
 		replay(mockUser);
 
+		Item mockItem = mock(Item.class);
 		Item mockItem2 = mock(Item.class);
 		Item mockItem3 = mock(Item.class);
 
-		expect(mockItem.getItemPrice()).andReturn(20.0);
-		expect(mockItem2.getItemPrice()).andReturn(30.0);
-		expect(mockItem3.getItemPrice()).andReturn(30.0);
+		expect(mockItem.getItemPrice()).andReturn(20.0).times(5);
+		expect(mockItem2.getItemPrice()).andReturn(30.0).times(5);
+		expect(mockItem3.getItemPrice()).andReturn(30.0).times(5);
 
 		replay(mockItem);
 		replay(mockItem2);
@@ -205,12 +217,13 @@ public class ShoppingCartTest {
 	@Test
 	public void whenUserBuyByCashTheMoreExpensiveItemIsNinetyPercentOfItsPrice() {
 
+		Item mockItem = mock(Item.class);
 		Item mockItem2 = mock(Item.class);
 		Item mockItem3 = mock(Item.class);
 
-		expect(mockItem.getItemPrice()).andReturn(20.0);
-		expect(mockItem2.getItemPrice()).andReturn(30.0);
-		expect(mockItem3.getItemPrice()).andReturn(30.0);
+		expect(mockItem.getItemPrice()).andReturn(20.0).times(5);
+		expect(mockItem2.getItemPrice()).andReturn(30.0).times(5);
+		expect(mockItem3.getItemPrice()).andReturn(30.0).times(5);
 
 		replay(mockItem);
 		replay(mockItem2);
@@ -224,6 +237,6 @@ public class ShoppingCartTest {
 		CashPayment cashPayment = new CashPayment();
 		shoppingCar.buy(cashPayment);
 		double total = cashPayment.getAmount();
-		assertTrue(total == 60.0);
+		assertTrue(total == 53.0);
 	}
 }

@@ -1,8 +1,13 @@
-package Clase4API;
+package Clase4API.ServiceImp;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import Clase4API.Service.Payment;
+import Clase4API.Service.ShoppingCartAPI;
+
 import java.util.Iterator;
+
 
 public class ShoppingCart implements ShoppingCartAPI {
 
@@ -68,7 +73,7 @@ public class ShoppingCart implements ShoppingCartAPI {
 		double totalPrice = 0;
 		double subtotal = resumeTotal();
 		System.out.println("El precio a pagar es: " + subtotal);
-		System.out.println(shoppingCar.getFirst().getItemPrice());
+		//System.out.println(shoppingCar.getFirst().getItemPrice());
 		boolean success = paymentOption.buyNow(user, shoppingCar, subtotal);
 
 		if (!success)

@@ -1,7 +1,9 @@
-package Clase4API;
+package Clase4API.ServiceImp;
 
 import java.util.Iterator;
 import java.util.LinkedList;
+
+import Clase4API.Service.Payment;
 
 public class CashPayment implements Payment {
 
@@ -25,7 +27,7 @@ public class CashPayment implements Payment {
 	public boolean buyNow(User user, LinkedList<Item> shoppingCar, double total) {
 		double expensiveItem = getMostExpensiveItem(shoppingCar);
 		setAmount(total - (expensiveItem * 0.9));
-		System.out.println("La compra No." + transactionId + " se realiza en efectivo");
+		System.out.println("La compra No." + transactionId + " se realiza en efectivo. Tiene descuento: el producto producto más costoso le es cobrado el 90%");
 		return true;
 	}
 
@@ -44,7 +46,6 @@ public class CashPayment implements Payment {
 		Iterator<Item> it = shoppingCar.listIterator();
 		while (it.hasNext()) {
 			Item item = it.next();
-			System.out.println(item.getItemPrice());
 			if (item.getItemPrice() >= maxPrice) {
 				maxPrice = item.getItemPrice();
 			}
