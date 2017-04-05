@@ -217,3 +217,4 @@ FROM `course` AS `c`
 	INNER JOIN `teacher` AS `t` ON (`c`.assigned_teacher = `t`.id_teacher) 
 	INNER JOIN `schedule_time` AS `s` ON (`c`.id_course = `s`.course) 
 WHERE t.id_teacher = '3'
+ORDER BY `s`.course
