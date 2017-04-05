@@ -174,8 +174,46 @@ SELECT `c`.name AS course ,
 	CONCAT(`s`.first_name, ' ', `s`.last_name) AS student,
 	CONCAT(`t`.first_name, ' ', `t`.last_name) AS teacher
 FROM `course` AS `c` 
-	INNER JOIN `teacher` AS `t` ON (`c`.assigned_teacher = `t`.id_teacher) 
+	INNER JOIN `teacher` AS `t ON (`c`.assigned_teacher = `t`.id_teacher) 
 	INNER JOIN `grades` AS `g` ON (`c`.id_course = `g`.course) 
 	INNER JOIN `student` AS `s` ON (`g`.student = `s`.registration_number) 
 ORDER BY `s`.last_name ASC
 
+____________________________________________________________________________________________________
+
+Percentage of students that passed a given course.
+
+Query:
+
+SELECT  `c`.name AS course,  
+	CONCAT(ROUND(SUM(IF(`g`.final_exam > 6,1,0))*100/COUNT(`g`.student)), ' %') AS 'Percentage of students that passed the course' 
+FROM `grades` AS `g` 
+	INNER JOIN `course` AS `c` ON (`g`.course = `c`.id_course)
+WHERE c.id_course = '3'
+
+
+Percentage of students that failed a given course.
+
+SELECT  `c`.name AS course,  
+	CONCAT(ROUND(SUM(IF(`g`.final_exam > 6,1,0))*100/COUNT(`g`.student)), ' %') AS 'Percentage of students that failed the course' 
+FROM `grades` AS `g` 
+	INNER JOIN `course` AS `c` ON (`g`.course = `c`.id_course)
+WHERE c.id_course = '3'
+
+_____________________________________________________________________________________________________
+
+For a given teacher, list the timeline for each course that he is assigned to (ordered by date), and the course name. The format should be:
+
+ Teacher: <last-name>, <first-name>
+ Schedule:
+   Monday 09:00 - 11:00: <course-name>
+   Monday 15:00 - 17:30: <course-name>
+   Friday 08:45 - 10:40: <course-name>
+
+
+SELECT  CONCAT(`t`.first_name, ' ', `t`.last_name) AS teacher,
+	CONCAT(`s`.day,' ', `s`.from, ' - ', `s`.to, ': ', `c`.name) AS schedule
+FROM `course` AS `c` 
+	INNER JOIN `teacher` AS `t` ON (`c`.assigned_teacher = `t`.id_teacher) 
+	INNER JOIN `schedule_time` AS `s` ON (`c`.id_course = `s`.course) 
+WHERE t.id_teacher = '3'
