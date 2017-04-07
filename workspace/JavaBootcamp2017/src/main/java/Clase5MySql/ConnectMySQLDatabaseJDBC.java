@@ -37,11 +37,13 @@ public class ConnectMySQLDatabaseJDBC {
 			e.getStackTrace();
 		} catch (Exception e) {
 			System.out.println("Se produjo el siguiente error: " + e.getMessage());
+		} finally {
+			close();
 		}
 	}
 
 	public void formatResult(ResultSet result) throws SQLException {
-		String teacher ="";
+		String teacher = "";
 		ArrayList schedule = new ArrayList();
 
 		while (result.next()) {
@@ -50,14 +52,32 @@ public class ConnectMySQLDatabaseJDBC {
 			schedule.add(schedulei);
 		}
 		System.out.println("Teacher: " + teacher);
-		System.out.println("Schedule: "); 
-		// Declaramos el Iterador e imprimimos los Elementos del ArrayList
+		System.out.println("Schedule: ");
+
 		Iterator<String> it = schedule.iterator();
-		while(it.hasNext()){
+		while (it.hasNext()) {
 			String element = it.next();
-			System.out.print(element+" \n");
+			System.out.print(element + " \n");
 		}
-		
+
+	}
+
+	private void close() {
+		try {
+			if (result != null) {
+				result.close();
+			}
+
+			if (statement != null) {
+				statement.close();
+			}
+
+			if (con != null) {
+				con.close();
+			}
+		} catch (Exception e) {
+
+		}
 	}
 
 }

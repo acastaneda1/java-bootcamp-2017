@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="Clase6Hibernate.Entities.Course" table="course">
+		<id name="idCourse" type="java.lang.Integer">
+			<column name="id_course" />
+			<generator class="identity" />
+		</id>
+		<property name="courseName" type="string">
+			<column name="name" length="25" not-null="true" />
+		</property>
+		<property name="hoursPerWeek" type="int">
+			<column name="hours_per_week" not-null="true" />
+		</property>
+		<many-to-one name="assignedTeacher" class="Clase6Hibernate.Entities.Teacher" fetch="select">
+             <column name="assigned_teacher" not-null="true" />
+         </many-to-one>
+		<set name="grades" table="grades" inverse="true" lazy="true" fetch="select" cascade="all">
+			<key>
+				<column name="course" not-null="true" />
+			</key>
+			<one-to-many class="Clase6Hibernate.Entities.Grades" />
+		</set>
+		<set name="schedule" table="schedule_time" inverse="true" lazy="true"
+			fetch="select" cascade="all">
+			<key>
+				<column name="course" not-null="true" />
+			</key>
+			<one-to-many class="Clase6Hibernate.Entities.ScheduleTime" />
+		</set>
+	</class>
+</hibernate-mapping>

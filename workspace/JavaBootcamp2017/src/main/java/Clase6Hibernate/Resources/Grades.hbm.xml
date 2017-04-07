@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+ <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="Clase6Hibernate.Entities.Grades" table="grades">
+		<id column="id_grade" name="idGrade" type="java.lang.Integer">
+			<generator class="identity" />
+		</id>
+		<property name="partialNote1" type="java.lang.Integer">
+			<column name="partial_note1" not-null="true" />
+		</property>
+		<property name="partialNote2" type="java.lang.Integer">
+			<column name="partial_note2" not-null="true" />
+		</property>
+		<property name="partialNote3" type="java.lang.Integer">
+			<column name="partial_note3" not-null="true" />
+		</property>
+		<property name="finalExam" type="java.lang.Integer">
+			<column name="final_exam" not-null="true" />
+		</property>
+		<many-to-one name="student" class="Clase6Hibernate.Entities.Student" fetch="select">
+             <column name="student" not-null="true" />
+         </many-to-one>
+         <many-to-one name="course" class="Clase6Hibernate.Entities.Course" fetch="select">
+             <column name="course" not-null="true" />
+         </many-to-one>
+	</class>
+</hibernate-mapping>

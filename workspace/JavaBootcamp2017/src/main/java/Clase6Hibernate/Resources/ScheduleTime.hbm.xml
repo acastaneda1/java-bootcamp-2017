@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+ <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="Clase6Hibernate.Entities.ScheduleTime" table="schedule_time">
+		<id column="id_schedule" name="idSchedule" type="java.lang.Integer">
+			<generator class="identity" />
+		</id>
+		<property name="day" type="string">
+			<column name="day" length="15" not-null="true" />
+		</property>
+		<property name="from" type="time">
+			<column name="from" not-null="true" />
+		</property>
+		<property name="to" type="time">
+			<column name="to" not-null="true" />
+		</property>
+		<many-to-one name="course" class="Clase6Hibernate.Entities.Course" fetch="select">
+             <column name="course" not-null="true" />
+         </many-to-one>
+	</class>
+</hibernate-mapping>

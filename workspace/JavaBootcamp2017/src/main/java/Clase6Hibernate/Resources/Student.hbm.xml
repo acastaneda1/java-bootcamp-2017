@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="Clase6Hibernate.Entities.Student" table="student">
+		<id column="id_student" name="idStudent" type="java.lang.Integer">
+			<generator class="identity" />
+		</id>
+		<property name="firstName" type="string">
+			<column name="first_name" length="25" not-null="true" />
+		</property>
+		<property name="lastName" type="string">
+			<column name="last_name" length="25" not-null="true" />
+		</property>
+		<property name="registrationNumber" type="java.lang.Integer">
+			<column name="registration_number" length="10" not-null="true" />
+		</property>
+		<property name="dateOfBirth" type="date">
+			<column name="date_of_birth" not-null="true" />
+		</property>
+		<set name="grades" table="grades" inverse="true" lazy="true"
+			fetch="select" cascade="all">
+			<key>
+				<column name="student" not-null="true" />
+			</key>
+			<one-to-many class="Clase6Hibernate.Entities.Grades" />
+		</set>
+	</class>
+</hibernate-mapping>
