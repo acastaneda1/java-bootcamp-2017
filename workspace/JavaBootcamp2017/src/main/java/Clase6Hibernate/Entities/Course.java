@@ -8,7 +8,7 @@ public class Course implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private int idCourse;
 	private String courseName;
-	private double hoursPerWeek;
+	private int hoursPerWeek;
 	private Teacher assignedTeacher;
 	private Set<Grades> grades = new HashSet<Grades>();
 	private Set<ScheduleTime> schedule = new HashSet<ScheduleTime>();
@@ -17,7 +17,7 @@ public class Course implements java.io.Serializable {
 
 	}
 
-	public Course(String name, double hours, Teacher teacher) {
+	public Course(String name, int hours, Teacher teacher) {
 		this.courseName = name;
 		this.hoursPerWeek = hours;
 		this.assignedTeacher = teacher;
@@ -39,11 +39,11 @@ public class Course implements java.io.Serializable {
 		this.courseName = name;
 	}
 
-	public double getHoursPerWeek() {
+	public int getHoursPerWeek() {
 		return hoursPerWeek;
 	}
 
-	public void setHoursPerWeek(double hours) {
+	public void setHoursPerWeek(int hours) {
 		this.hoursPerWeek = hours;
 	}
 

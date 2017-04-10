@@ -8,13 +8,13 @@
 		<property name="day" type="string">
 			<column name="day" length="15" not-null="true" />
 		</property>
-		<property name="from" type="time">
-			<column name="from" not-null="true" />
+		<property name="fromHour" type="time">
+			<column name="from_hour" not-null="true" />
 		</property>
-		<property name="to" type="time">
-			<column name="to" not-null="true" />
+		<property name="toHour" type="time">
+			<column name="to_hour" not-null="true" />
 		</property>
-		<many-to-one name="course" class="Clase6Hibernate.Entities.Course" fetch="select">
+		<many-to-one name="course" class="Clase6Hibernate.Entities.Course" lazy="false"  fetch="select">
              <column name="course" not-null="true" />
          </many-to-one>
 	</class>

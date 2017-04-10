@@ -12,7 +12,7 @@
 		<property name="hoursPerWeek" type="int">
 			<column name="hours_per_week" not-null="true" />
 		</property>
-		<many-to-one name="assignedTeacher" class="Clase6Hibernate.Entities.Teacher" fetch="select">
+		<many-to-one name="assignedTeacher" class="Clase6Hibernate.Entities.Teacher" lazy="false" fetch="select">
              <column name="assigned_teacher" not-null="true" />
          </many-to-one>
 		<set name="grades" table="grades" inverse="true" lazy="true" fetch="select" cascade="all">

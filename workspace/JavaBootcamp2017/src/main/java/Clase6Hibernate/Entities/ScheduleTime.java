@@ -7,8 +7,8 @@ public class ScheduleTime implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private int idSchedule;
 	private String day;
-	private Time from;
-	private Time to;
+	private Time fromHour;
+	private Time toHour;
 	private Student student;
 	private Course course;
 
@@ -18,8 +18,8 @@ public class ScheduleTime implements java.io.Serializable {
 
 	public ScheduleTime(String days, Time fromHour, Time toHour, Student students, Course courses) {
 		this.day = days;
-		this.from = fromHour;
-		this.to = toHour;
+		this.fromHour = fromHour;
+		this.toHour = toHour;
 		this.student = students;
 		this.course = courses;
 	}
@@ -40,20 +40,20 @@ public class ScheduleTime implements java.io.Serializable {
 		this.day = days;
 	}
 
-	public Time getFrom() {
-		return from;
+	public Time getFromHour() {
+		return fromHour;
 	}
 
-	public void setFrom(Time fromHour) {
-		this.from = fromHour;
+	public void setFromHour(Time fromHour) {
+		this.fromHour = fromHour;
 	}
 
-	public Time getTo() {
-		return to;
+	public Time getToHour() {
+		return toHour;
 	}
 
-	public void setTo(Time toHour) {
-		this.to = toHour;
+	public void setToHour(Time toHour) {
+		this.toHour = toHour;
 	}
 
 	public Student getStudent() {

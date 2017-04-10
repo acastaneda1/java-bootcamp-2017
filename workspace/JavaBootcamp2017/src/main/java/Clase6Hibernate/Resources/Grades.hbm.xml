@@ -17,10 +17,10 @@
 		<property name="finalExam" type="java.lang.Integer">
 			<column name="final_exam" not-null="true" />
 		</property>
-		<many-to-one name="student" class="Clase6Hibernate.Entities.Student" fetch="select">
+		<many-to-one name="student" class="Clase6Hibernate.Entities.Student" lazy="false"  fetch="select">
              <column name="student" not-null="true" />
          </many-to-one>
-         <many-to-one name="course" class="Clase6Hibernate.Entities.Course" fetch="select">
+         <many-to-one name="course" class="Clase6Hibernate.Entities.Course" lazy="false"  fetch="select">
              <column name="course" not-null="true" />
          </many-to-one>
 	</class>
