@@ -128,12 +128,16 @@ public interface HighSchoolService {
 	public void deleteGrades(Grades grades);
 
 	/*
-	 * This method receive a course object and returns a list of student objects
-	 * with all the courses in the DB
+	 * This method returns the percentage of students that failed a course from
+	 * the DB
 	 */
-	// public List<Student> getStudentsThatFailedCourse(Course course);
+	public int getPercentageOfCourseLoss();
 
-	// public List<Student> getStudentsThatPassedCourse(Course course);
+	/*
+	 * This method returns the percentage of students that passed a course from
+	 * the DB
+	 */
+	public int getPercentageOfAprovedStudents();
 
 	/*
 	 * This method receive all data to create a new schedule (course, student,

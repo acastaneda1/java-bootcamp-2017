@@ -2,6 +2,7 @@ package Clase6Hibernate.DAOImp;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -95,4 +96,46 @@ public class GradesDAOImp implements GradesDAO{
 		session.close();
 	}
 
+	public int getGradesFromCourse(int idCourse){
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = session.beginTransaction();
+		String hql ="select  g from Grades g join g.course c where c.idCourse= :course";
+		Query query = session.createQuery( hql ,Grades.class ).setParameter("course",idCourse);
+		List<Student> students = query.list();
+		transaction.commit();
+		session.close();
+		return students.size();
+	}
+	
+	@Override
+	public int getPercentageOfCourseLoss(){
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = session.beginTransaction();
+		String hql ="select  g from Grades g join g.student s join g.course c where c.idCourse= :course and g.finalExam <= 6";
+		int idCourse = 2;
+		Query query = session.createQuery( hql ,Grades.class ).setParameter("course",idCourse);
+		List<Student> students = query.list();
+		int courseStudents = getGradesFromCourse(idCourse);
+		int lossPercentage = students.size()*100/courseStudents;
+		transaction.commit();
+		session.close();
+		System.out.println("The percentage of students that failed the course is: "+lossPercentage+"%");
+		return lossPercentage;	
+	}
+	
+	@Override
+	public int getPercentageOfAprovedStudents(){
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = session.beginTransaction();
+		String hql ="select  g from Grades g join g.student s join g.course c where c.idCourse= :course and g.finalExam > 6";
+		int idCourse = 2;
+		Query query = session.createQuery( hql ,Grades.class ).setParameter("course",idCourse);
+		List<Student> students = query.list();
+		int courseStudents = getGradesFromCourse(idCourse);
+		int AprovedPercentage = students.size()*100/courseStudents;
+		transaction.commit();
+		session.close();
+		System.out.println("The percentage of students that passed the course is: "+AprovedPercentage+"%");
+		return AprovedPercentage;	
+	}
 }

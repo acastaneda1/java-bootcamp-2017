@@ -32,20 +32,12 @@ public class MainClass {
 	public static void main(String[] args) throws ParseException {
 
 		HighSchoolServiceImp hs = HighSchoolServiceFactory.getService();
-		/*Session session = HibernateUtil.getSessionFactory().openSession();
-		session.beginTransaction();
 
-		String hql = "select g.course.courseName, sum(g.student) from Grades g join g.course where g.finalExam>6 and g.course.idCourse='1'";
-		Query query = session.createQuery(hql);
-
-		List<Grades> Gades = query.list();
-		System.out.println(Gades);*/
-		// for (Grades datos : Gades) {
-		// System.out.println(datos);
-		// }
-		// session.getTransaction().commit();
-		// session.close();
-
+		// Topic 4 from SQL exercises 
+		hs.getPercentageOfAprovedStudents();
+		hs.getPercentageOfCourseLoss();
+		
+		// Provide CRUD operations for high school classes.
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date bithDate = dateFormat.parse("2016-01-01");
 
@@ -53,7 +45,7 @@ public class MainClass {
 
 		hs.getStudents();
 
-		Student studentExample = hs.getStudent(17);
+		Student studentExample = hs.getStudent(18);
 		studentExample.setFirstName("desde updated");
 		hs.updateStudent(studentExample);		
 
@@ -61,7 +53,7 @@ public class MainClass {
 
 		hs.getTeachers();
 
-		Teacher teacherExample = hs.getTeacher(5);
+		Teacher teacherExample = hs.getTeacher(6);
 		teacherExample.setLastName("javala");
 		hs.updateTeacher(teacherExample);
 		
@@ -69,21 +61,22 @@ public class MainClass {
 		
 		hs.getCourses();
 		
-		Course courseExample = hs.getCourse(4);
+		Course courseExample = hs.getCourse(5);
 		courseExample.setCourseName("Bootcamp updated");
 
 		hs.updateCourse(courseExample);
 		
-		hs.createGrades(studentExample, courseExample, 5, 6, 8, 7);
+		int idGrades1 =hs.createGrades(studentExample, courseExample, 5, 6, 8, 7);
 		
-		Grades gradesExample = hs.getGradesbyId(34);
+		Grades gradesExample = hs.getGradesbyId(36);
 		gradesExample.setPartialNote1(6);
 		hs.updateGrades(gradesExample);
+		
 		
 		Time fromHour = Time.valueOf("08:00:00");
 		Time toHour = Time.valueOf("10:00:00");
 		
-		hs.createScheduleTime("Monday", fromHour, toHour, studentExample, courseExample);
+		int IdSchedule = hs.createScheduleTime("Monday", fromHour, toHour, studentExample, courseExample);
 		
 		hs.getSchedulesTime();
 		ScheduleTime scheduleExample = hs.getScheduleTime(7);

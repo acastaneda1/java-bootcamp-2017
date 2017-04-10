@@ -128,10 +128,16 @@ public class HighSchoolServiceImp implements HighSchoolService{
 	public void deleteGrades(Grades grades){
 		gradesDao.deleteGrades(grades);
 	}
+	
+	@Override 
+	public int getPercentageOfCourseLoss(){
+		return gradesDao.getPercentageOfCourseLoss();
+	}
 
-	// @Override public List<Student> getStudentsThatFailedCourse(Course course);
-
-	// @Override public List<Student> getStudentsThatPassedCourse(Course course);
+	@Override 
+	public int getPercentageOfAprovedStudents(){
+		return gradesDao.getPercentageOfAprovedStudents();
+	}
 
 	@Override
 	public int createScheduleTime(String days, Time fromHour, Time toHour, Student students, Course courses){

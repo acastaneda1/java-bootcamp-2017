@@ -56,7 +56,7 @@ public class ScheduleTimeDAOImp implements ScheduleTimeDAO{
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = session.beginTransaction();
 		
-		String hql = "select s from SchedulesTimes s ";
+		String hql = "select s from ScheduleTime s ";
 		Query query = session.createQuery(hql);
 
 		List<ScheduleTime> schedule = query.list();

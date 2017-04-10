@@ -16,4 +16,7 @@ public interface GradesDAO {
 
 	public void deleteGrades(Grades grades);
 
+	public int getPercentageOfCourseLoss();
+	
+	public int getPercentageOfAprovedStudents();
 }
