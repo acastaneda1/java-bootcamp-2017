@@ -1,4 +1,4 @@
-package Clase4API.ServiceImp;
+package Clase4API.Model;
 
 public class Counter {
 	private int count=0;

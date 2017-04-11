@@ -2,8 +2,8 @@ package Clase4API.Service;
 
 import java.util.LinkedList;
 
-import Clase4API.ServiceImp.Item;
-import Clase4API.ServiceImp.User;
+import Clase4API.Model.Item;
+import Clase4API.Model.User;
 
 public interface Payment {
 

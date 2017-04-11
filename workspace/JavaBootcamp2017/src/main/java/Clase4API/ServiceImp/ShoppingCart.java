@@ -3,6 +3,9 @@ package Clase4API.ServiceImp;
 import java.util.LinkedList;
 import java.util.List;
 
+import Clase4API.Model.Item;
+import Clase4API.Model.Offer;
+import Clase4API.Model.User;
 import Clase4API.Service.Payment;
 import Clase4API.Service.ShoppingCartAPI;
 
@@ -73,7 +76,7 @@ public class ShoppingCart implements ShoppingCartAPI {
 		double totalPrice = 0;
 		double subtotal = resumeTotal();
 		System.out.println("El precio a pagar es: " + subtotal);
-		//System.out.println(shoppingCar.getFirst().getItemPrice());
+		
 		boolean success = paymentOption.buyNow(user, shoppingCar, subtotal);
 
 		if (!success)
@@ -82,12 +85,26 @@ public class ShoppingCart implements ShoppingCartAPI {
 			totalPrice = paymentOption.getAmount();
 			System.out.println("Por ende el valor final de su compra fue: " + totalPrice);
 		}
-
-		/*
-		 * Iterator<Item> it = getItems().listIterator(); while (it.hasNext()) {
-		 * Item item = it.next(); System.out.println(item.getItemId() + " " +
-		 * item.getItemDescription() + " " + item.getItemPrice()); }
-		 */
+		
 		return totalPrice;
 	}
+	
+	@Override
+	public String formatItems(){
+		Iterator<Item> it = shoppingCar.iterator();
+		String itemString = null;
+		StringBuilder stringItem = new StringBuilder();
+		while (it.hasNext()) {
+			Item item = it.next();
+			stringItem.append("-");
+			stringItem.append(item.getItemDescription());
+			stringItem.append(" ........$");
+			stringItem.append(item.getItemPrice());
+			stringItem.append(System.getProperty("line.separator"));
+		}
+		itemString = stringItem.toString();
+		System.out.println(itemString);
+		return itemString;
+	}
+	
 }

@@ -2,6 +2,7 @@ package Clase4API.ServiceImp;
 
 import java.util.LinkedList;
 
+import Clase4API.Model.User;
 import Clase4API.Service.UserService;
 
 public class UserImp implements UserService {

@@ -2,8 +2,8 @@ package Clase4API.Service;
 
 import java.util.LinkedList;
 
-import Clase4API.ServiceImp.Item;
-import Clase4API.ServiceImp.User;
+import Clase4API.Model.Item;
+import Clase4API.Model.User;
 
 public interface ShoppingCartAPI {
 
@@ -45,4 +45,11 @@ public interface ShoppingCartAPI {
 	 * the Payment option is selected and implemented
 	 */
 	public double buy(Payment paymentOption);
+
+	/*
+	 * This method return string with the items that the user is going to buy
+	 * and the current price
+	 */
+	public String formatItems();
+
 }

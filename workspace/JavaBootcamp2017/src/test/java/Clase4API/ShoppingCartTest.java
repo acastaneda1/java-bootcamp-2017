@@ -13,12 +13,12 @@ import org.easymock.TestSubject;
 import org.easymock.Mock;
 import org.junit.runner.RunWith;
 
-import Clase4API.ServiceImp.CashPayment;
-import Clase4API.ServiceImp.CreditCardPayment;
-import Clase4API.ServiceImp.Item;
-import Clase4API.ServiceImp.PaypalPayment;
+import Clase4API.Model.CashPayment;
+import Clase4API.Model.CreditCardPayment;
+import Clase4API.Model.Item;
+import Clase4API.Model.PaypalPayment;
+import Clase4API.Model.User;
 import Clase4API.ServiceImp.ShoppingCart;
-import Clase4API.ServiceImp.User;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -36,7 +36,7 @@ public class ShoppingCartTest {
 	public void setUp() {
 		shoppingCar = ShoppingCartFactory.getLocalShoppingCart();
 	}
-
+	/*
 	@Test
 	public void whenAddAnItemIsAddedToShoppingCart() {
 		Item mockItem = mock(Item.class);
@@ -127,18 +127,6 @@ public class ShoppingCartTest {
 		expect(mockItem2.getItemPrice()).andReturn(55.0).times(5);
 		expect(mockItem3.getItemPrice()).andReturn(75.0).times(5);
 		expect(mockItem4.getItemPrice()).andReturn(10.0).times(5);
-
-		/*
-		 * expect(mockItem.getItemId()).andReturn("1");
-		 * expect(mockItem2.getItemId()).andReturn("2");
-		 * expect(mockItem3.getItemId()).andReturn("3");
-		 * expect(mockItem4.getItemId()).andReturn("4");
-		 * 
-		 * expect(mockItem.getItemDescription()).andReturn("Apple");
-		 * expect(mockItem2.getItemDescription()).andReturn("Strawberry");
-		 * expect(mockItem3.getItemDescription()).andReturn("Grapes");
-		 * expect(mockItem4.getItemDescription()).andReturn("Kiwi");
-		 */
 
 		replay(mockItem);
 		replay(mockItem2);
@@ -238,5 +226,47 @@ public class ShoppingCartTest {
 		shoppingCar.buy(cashPayment);
 		double total = cashPayment.getAmount();
 		assertTrue(total == 53.0);
+	}*/
+	
+	@Test
+	public void whenDisplayInformationAboutTheListOfItemsItHasFormat(){
+		Item mockItem = mock(Item.class);
+		Item mockItem2 = mock(Item.class);
+		Item mockItem3 = mock(Item.class);
+
+		expect(mockItem.getItemPrice()).andReturn(20.0).times(5);
+		expect(mockItem2.getItemPrice()).andReturn(30.0).times(5);
+		expect(mockItem3.getItemPrice()).andReturn(30.0).times(5);
+
+		expect(mockItem.getItemDescription()).andReturn("Apple").times(5);
+		expect(mockItem2.getItemDescription()).andReturn("Strawberry").times(5);
+		expect(mockItem3.getItemDescription()).andReturn("Grapes").times(5);
+		
+		replay(mockItem);
+		replay(mockItem2);
+		replay(mockItem3);
+		
+		shoppingCar.addItem(mockItem);
+		shoppingCar.addItem(mockItem2);
+		shoppingCar.addItem(mockItem3);
+		
+		StringBuilder stringItem = new StringBuilder();
+		stringItem.append("-");
+		stringItem.append(mockItem.getItemDescription());
+		stringItem.append(" .....$");
+		stringItem.append(mockItem.getItemPrice());
+		stringItem.append(System.getProperty("line.separator"));
+		stringItem.append("-");
+		stringItem.append(mockItem2.getItemDescription());
+		stringItem.append(" .....$");
+		stringItem.append(mockItem2.getItemPrice());
+		stringItem.append(System.getProperty("line.separator"));
+		stringItem.append("-");
+		stringItem.append(mockItem3.getItemDescription());
+		stringItem.append(" .....$");
+		stringItem.append(mockItem3.getItemPrice());
+		stringItem.append(System.getProperty("line.separator"));
+		String stringItems = stringItem.toString();
+		assertEquals(stringItems, shoppingCar.formatItems());	
 	}
 }

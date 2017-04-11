@@ -1,4 +1,4 @@
-package Clase4API.ServiceImp;
+package Clase4API.Model;
 
 public class User {
 

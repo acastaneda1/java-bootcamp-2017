@@ -1,4 +1,4 @@
-package Clase4API.ServiceImp;
+package Clase4API.Model;
 
 public class Item {
 
@@ -6,8 +6,7 @@ public class Item {
 	private double price;
 	private String description;
 
-	public Item(String itemId, double itemPrice, String itemDescription) {
-		id = itemId;
+	public Item(double itemPrice, String itemDescription) {
 		price = itemPrice;
 		description = itemDescription;
 	}

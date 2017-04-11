@@ -1,6 +1,6 @@
 package Clase4API.Service;
 
-import Clase4API.ServiceImp.User;
+import Clase4API.Model.User;
 
 public interface UserService {
 	
