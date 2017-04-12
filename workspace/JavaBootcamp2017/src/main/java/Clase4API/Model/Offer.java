@@ -5,24 +5,26 @@ import java.util.LinkedList;
 
 public class Offer {
 
-	private String id;
+	private int idOffer;
 	private double price;
 	private String name;
+	private String description;
 	private LinkedList<Item> items;
 
-	public Offer( double offerPrice, String offerName, LinkedList<Item> offerItems) {
+	public Offer( double offerPrice, String offerName, String offerDescription, LinkedList<Item> offerItems) {
 		
-		price = offerPrice;
-		name = offerName;
-		items = offerItems;
+		this.price = offerPrice;
+		this.name = offerName;
+		this.description = offerDescription;
+		this.items = offerItems;
 	}
 
-	public void setOfferId(String newValue) {
-		id = newValue;
+	public void setOfferId(int newValue) {
+		idOffer = newValue;
 	}
 
-	public String getOfferId() {
-		return id;
+	public int getOfferId() {
+		return idOffer;
 	}
 
 	public double getOfferPrice() {
@@ -41,6 +43,14 @@ public class Offer {
 		return name;
 	}
 
+	public void setOfferDescription(String newValue) {
+		description = newValue;
+	}
+
+	public String getOfferDescription() {
+		return description;
+	}
+	
 	public void addItemToOffer(Item item) {
 		items.add(item);
 	}

@@ -26,7 +26,7 @@ import java.util.List;
 @RunWith(EasyMockRunner.class)
 public class ShoppingCartTest {
 
-	@TestSubject
+	/*@TestSubject
 	ShoppingCart shoppingCar = ShoppingCartFactory.getLocalShoppingCart();
 
 	@Mock
@@ -228,7 +228,7 @@ public class ShoppingCartTest {
 		assertTrue(total == 53.0);
 	}*/
 	
-	@Test
+	/*@Test
 	public void whenDisplayInformationAboutTheListOfItemsItHasFormat(){
 		Item mockItem = mock(Item.class);
 		Item mockItem2 = mock(Item.class);
@@ -268,5 +268,5 @@ public class ShoppingCartTest {
 		stringItem.append(System.getProperty("line.separator"));
 		String stringItems = stringItem.toString();
 		assertEquals(stringItems, shoppingCar.formatItems());	
-	}
+	}*/
 }

@@ -8,7 +8,7 @@ public interface ItemDAO {
 	
 	public void updateItem(Item item);
 	
-	public Item getItem(int idItem);
+	//public Item getItem(int idItem);
 	
 	public void deleteItem(Item item);
 }

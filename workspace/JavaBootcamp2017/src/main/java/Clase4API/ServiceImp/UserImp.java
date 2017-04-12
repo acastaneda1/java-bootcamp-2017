@@ -17,7 +17,7 @@ public class UserImp implements UserService {
 
 	@Override
 	public User getUser(String id, String name, String email, String password, int creditCardNumberUser) {
-		return new User(id, name, email, password, creditCardNumberUser);
+		return new User(name, email, password, creditCardNumberUser);
 	}
 
 	@Override

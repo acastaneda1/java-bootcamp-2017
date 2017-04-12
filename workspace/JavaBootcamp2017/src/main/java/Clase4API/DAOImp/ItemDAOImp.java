@@ -15,10 +15,10 @@ public class ItemDAOImp implements ItemDAO{
 		
 	}
 	
-	@Override
+	/*@Override
 	public Item getItem(int idItem){
 		return item;
-	}
+	}*/
 	
 	@Override
 	public void deleteItem(Item item){

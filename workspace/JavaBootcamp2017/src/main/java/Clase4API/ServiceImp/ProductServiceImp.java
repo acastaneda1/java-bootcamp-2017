@@ -17,7 +17,7 @@ public class ProductServiceImp implements ProductService{
 
 	@Override
 	public void createItem(Item item){
-		ItemDAOImp.createItem(item);
+		//ItemDAO.createItem(item);
 	}
 	
 	@Override
@@ -35,7 +35,7 @@ public class ProductServiceImp implements ProductService{
 		
 	}
 	
-	@Override
+	/*@Override
 	public Item getItem(int idItem){
 		
 	}
@@ -43,7 +43,7 @@ public class ProductServiceImp implements ProductService{
 	@Override
 	public Offer getOffer(int idOffer){
 		
-	}
+	}*/
 	
 	@Override
 	public void deleteItem(Item item){

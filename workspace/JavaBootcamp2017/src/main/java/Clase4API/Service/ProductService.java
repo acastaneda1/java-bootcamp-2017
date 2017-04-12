@@ -32,12 +32,12 @@ public interface ProductService {
 	/*
 	 * This method receive the id of an item object and returns it 
 	 */
-	public Item getItem(int idItem);
+	//public Item getItem(int idItem);
 
 	/*
 	 * This method receive the id of an offer object and returns it 
 	 */
-	public Offer getOffer(int idOffer);
+	//public Offer getOffer(int idOffer);
 
 	/*
 	 * This method receive an item object and delete it from DB
@@ -52,11 +52,5 @@ public interface ProductService {
 	 * This method create a transaction in DB
 	 */
 	public void createTransaction();
-
-	/*
-	 * This method return string with the items that the user is going to buy
-	 * and the current price
-	 */
-	public String formatItems(LinkedList<Item> cart);
 
 }

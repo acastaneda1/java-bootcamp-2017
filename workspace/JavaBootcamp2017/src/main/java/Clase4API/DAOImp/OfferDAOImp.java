@@ -15,10 +15,10 @@ public class OfferDAOImp implements OfferDAO{
 		
 	}
 	
-	@Override
+	/*@Override
 	public Offer getOffer(int idOffer){
 		return idOffer;
-	}
+	}*/
 	
 	@Override
 	public void deleteOffer(Offer offer){

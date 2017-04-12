@@ -8,7 +8,7 @@ public interface OfferDAO {
 
 	public void updateOffer(Offer offer);
 	
-	public Offer getOffer(int idOffer);
+	//public Offer getOffer(int idOffer);
 	
 	public void deleteOffer(Offer offer);
 }

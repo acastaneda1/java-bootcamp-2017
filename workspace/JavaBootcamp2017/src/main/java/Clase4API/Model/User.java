@@ -1,26 +1,48 @@
 package Clase4API.Model;
 
-public class User {
+import java.io.Serializable;
+import javax.persistence.*;
 
-	private String userId;
+@Entity
+@Table(name = "user")
+public class User implements Serializable {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_user")
+	private int userId;
+
+	@Column(name = "user_name", nullable = false, unique = true)
 	private String userName;
+
+	@Column(name = "user_email")
 	private String userEmail;
+
+	@Column(name = "user_password")
 	private String userPassword;
+
+	@Column(name = "creditcard_number")
 	private int creditCardNumber;
 
-	public User(String id, String name, String email, String password, int creditCardNumberUser) {
-		this.userId = id;
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private ShoppingCart shoppingCart;
+
+	public User() {
+
+	}
+
+	public User(String name, String email, String password, int creditCardNumberUser) {
 		this.userName = name;
 		this.userEmail = email;
 		this.userPassword = password;
 		this.creditCardNumber = creditCardNumberUser;
 	}
 
-	public void setUserId(String idU) {
+	public void setUserId(int idU) {
 		this.userId = idU;
 	}
 
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
@@ -54,5 +76,13 @@ public class User {
 
 	public int getUserCCNumber() {
 		return creditCardNumber;
+	}
+
+	public ShoppingCart getShoppingCart() {
+		return shoppingCart;
+	}
+
+	public void setShoppingCart(ShoppingCart newValue) {
+		this.shoppingCart = newValue;
 	}
 }

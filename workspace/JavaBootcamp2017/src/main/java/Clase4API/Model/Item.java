@@ -1,22 +1,64 @@
 package Clase4API.Model;
 
-public class Item {
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
-	private String id;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.*;
+
+@Entity
+@Table(name = "item")
+public class Item implements Serializable {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_item")
+	private int idItem;
+
+	@Column(name = "price")
 	private double price;
+
+	@Column(name = "name")
+	private String name;
+
+	@Column(name = "description")
 	private String description;
 
-	public Item(double itemPrice, String itemDescription) {
-		price = itemPrice;
-		description = itemDescription;
+	@ManyToOne()
+	@JoinColumn(name = "id_category", nullable = false)
+	private Category category;
+
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name = "id_itembag")
+	private ItemBag itemBags;
+	
+	public void Item(){
+		
 	}
 
-	public void setItemId(String newValue) {
-		id = newValue;
+	public Item(double itemPrice, String itemName, String itemDescription, Category itemCategory) {
+		this.price = itemPrice;
+		this.description = itemDescription;
+		this.name = itemName;
+		this.category = itemCategory;
 	}
 
-	public String getItemId() {
-		return id;
+	public void setItemId(int newValue) {
+		this.idItem = newValue;
+	}
+
+	public int getItemId() {
+		return idItem;
 	}
 
 	public double getItemPrice() {
@@ -24,14 +66,29 @@ public class Item {
 	}
 
 	public void setItemPrice(double newValue) {
-		price = newValue;
+		this.price = newValue;
 	}
 
 	public void setItemDescription(String newValue) {
-		description = newValue;
+		this.description = newValue;
 	}
 
 	public String getItemDescription() {
 		return description;
+	}
+
+	public void setName(String newValue) {
+		this.name = newValue;
+	}
+
+	public String getName() {
+		return name;
+	}
+	public ItemBag getItemBag() {
+		return itemBags;
+	}
+
+	public void setItemBag(ItemBag newValue) {
+		this.itemBags = newValue;
 	}
 }
