@@ -17,7 +17,9 @@ public class MainApp {
 			transaction = session.getTransaction();
 			transaction.begin();
 
-			Category category = new Category("Fruits", "sweet");
+			Category category = new Category();
+			category.setCategoryDescription("sweet");
+			category.setCategoryName("Fruits");
 			
 			ItemBag itemBag = new ItemBag();
 			itemBag.setQuantity(2);
@@ -27,9 +29,9 @@ public class MainApp {
 
 
 			session.save(category);
-			session.save(itemBag);
-			session.save(item1);
-
+			//session.save(item1);
+			//session.save(itemBag);
+			
 			transaction.commit();
 
 		} catch (Exception e) {

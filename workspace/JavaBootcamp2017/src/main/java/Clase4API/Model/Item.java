@@ -4,16 +4,6 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.*;
 
 @Entity
@@ -35,7 +25,7 @@ public class Item implements Serializable {
 	private String description;
 
 	@ManyToOne()
-	@JoinColumn(name = "id_category", nullable = false)
+	@JoinColumn(name = "id_category", foreignKey = @ForeignKey(name = "id_category_FK"))
 	private Category category;
 
 	@OneToOne(fetch=FetchType.LAZY)

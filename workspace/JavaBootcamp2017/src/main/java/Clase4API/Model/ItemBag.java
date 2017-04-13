@@ -21,11 +21,6 @@ public class ItemBag implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "itemBags", fetch = FetchType.LAZY)
 	private Item item;
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "cart_items", joinColumns = { @JoinColumn(name = "id_itembag") }, inverseJoinColumns = {
-			@JoinColumn(name = "id_cart") })
-	private Set<ShoppingCart> cart = new HashSet<ShoppingCart>();
-
 	public void ItemBag() {
 
 	}
@@ -58,11 +53,4 @@ public class ItemBag implements Serializable {
 		this.item = newValue;
 	}
 
-	public Set<ShoppingCart> getShoppingCart() {
-		return cart;
-	}
-
-	public void setShoppingCart(Set<ShoppingCart> newValue) {
-		this.cart = newValue;
-	}
 }
