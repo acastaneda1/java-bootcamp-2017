@@ -1,24 +1,21 @@
-package Clase4API.ServiceImp;
-
-import java.util.LinkedList;
-import java.util.List;
-
-import Clase4API.Model.Item;
-import Clase4API.Model.Offer;
-import Clase4API.Model.User;
-import Clase4API.Service.Payment;
-import Clase4API.Service.ShoppingCartAPI;
+package FinalProject.ServiceImp;
 
 import java.util.Iterator;
+import java.util.LinkedList;
 
+import FinalProject.Entities.Item;
+import FinalProject.Entities.User;
+import FinalProject.Entities.ItemBag;
+import FinalProject.Services.Payment;
+import FinalProject.Services.ShoppingCartAPI;
 
-public class ShoppingCart implements ShoppingCartAPI {
+public class ShoppingCartImp implements ShoppingCartAPI{
 
-	private LinkedList<Item> shoppingCar;
+	private LinkedList<Item> itemList;
 	private User user;
 
-	public ShoppingCart() {
-		shoppingCar = new LinkedList<Item>();
+	public ShoppingCartImp() {
+		itemList = new LinkedList<Item>();
 	}
 
 	@Override
@@ -28,26 +25,26 @@ public class ShoppingCart implements ShoppingCartAPI {
 
 	@Override
 	public void addItem(Item item) {
-		shoppingCar.add(item);
+		itemList.add(item);
 	}
 
 	@Override
 	public void removeItem(Item item) {
-		if (shoppingCar.contains(item))
-			shoppingCar.remove(item);
+		if (itemList.contains(item))
+			itemList.remove(item);
 		else
 			System.out.println("El item seleccionado no se encuentra en su carrito de compras");
 	}
 
 	public LinkedList<Item> getItems() {
-		if (shoppingCar.isEmpty())
+		if (itemList.isEmpty())
 			System.out.println("El carrito esta vacio");
-		return shoppingCar;
+		return itemList;
 
 	}
 
 	public boolean containItem(Item item) {
-		if (shoppingCar.contains(item))
+		if (itemList.contains(item))
 			return true;
 		else
 			return false;
@@ -67,7 +64,7 @@ public class ShoppingCart implements ShoppingCartAPI {
 
 	@Override
 	public void clearShoppingCart() {
-		shoppingCar.clear();
+		itemList.clear();
 	}
 
 	@Override
@@ -77,7 +74,7 @@ public class ShoppingCart implements ShoppingCartAPI {
 		double subtotal = resumeTotal();
 		System.out.println("El precio a pagar es: " + subtotal);
 		
-		boolean success = paymentOption.buyNow(user, shoppingCar, subtotal);
+		boolean success = paymentOption.buyNow(user, itemList, subtotal);
 
 		if (!success)
 			System.out.println("La compra no puedo ser realizada por el metodo seleccionado");
@@ -91,7 +88,7 @@ public class ShoppingCart implements ShoppingCartAPI {
 	
 	@Override
 	public String formatItems(){
-		Iterator<Item> it = shoppingCar.iterator();
+		Iterator<Item> it = itemList.iterator();
 		String itemString = null;
 		StringBuilder stringItem = new StringBuilder();
 		while (it.hasNext()) {
@@ -106,5 +103,4 @@ public class ShoppingCart implements ShoppingCartAPI {
 		System.out.println(itemString);
 		return itemString;
 	}
-	
 }
