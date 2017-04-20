@@ -1,80 +1,93 @@
 package FinalProject.ServiceImp;
 
-import java.util.Iterator;
+import java.util.Date;
 import java.util.LinkedList;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import FinalProject.DAOImp.ShoppingCartDAOImp;
 import FinalProject.Entities.Item;
 import FinalProject.Entities.User;
+import FinalProject.Model.State;
 import FinalProject.Entities.ItemBag;
 import FinalProject.Services.Payment;
 import FinalProject.Services.ShoppingCartAPI;
 
-public class ShoppingCartImp implements ShoppingCartAPI{
+@Service
+public class ShoppingCartImp implements ShoppingCartAPI {
 
-	private LinkedList<Item> itemList;
+	private LinkedList<ItemBag> itemList;
 	private User user;
+	private State state;
+	private Date date;
+	int idCartDao;
+
+	@Autowired
+	ShoppingCartDAOImp cartDao;
 
 	public ShoppingCartImp() {
-		itemList = new LinkedList<Item>();
+
+	}
+
+	public ShoppingCartImp(User user) {
+		this.user = user;
+		this.date = new Date();
+	}
+
+	public void setShoppingCartDAO(ShoppingCartDAOImp cartDao) {
+		this.cartDao = cartDao;
 	}
 
 	@Override
-	public void setCartUser(User userA) {
+	public void setCartUser(User userA, int idShoppingCart) {
 		this.user = userA;
 	}
 
 	@Override
-	public void addItem(Item item) {
-		itemList.add(item);
+	public int createShoppingCart(User user) {
+		return cartDao.createCart(user);
 	}
 
 	@Override
-	public void removeItem(Item item) {
-		if (itemList.contains(item))
-			itemList.remove(item);
-		else
-			System.out.println("El item seleccionado no se encuentra en su carrito de compras");
-	}
-
-	public LinkedList<Item> getItems() {
-		if (itemList.isEmpty())
-			System.out.println("El carrito esta vacio");
-		return itemList;
-
-	}
-
-	public boolean containItem(Item item) {
-		if (itemList.contains(item))
-			return true;
-		else
-			return false;
+	public boolean deleteShoppingCart(int idShoppingCart) {
+		return cartDao.deleteShoppingCart(idShoppingCart);
 	}
 
 	@Override
-	public double resumeTotal() {
-
-		int totalPrice = 0;
-		Iterator<Item> it = getItems().listIterator();
-		while (it.hasNext()) {
-			Item item = it.next();
-			totalPrice += item.getItemPrice();
-		}
-		return totalPrice;
+	public boolean addItem(Item item, int idShoppingCart) {
+		return cartDao.addItem(item, idShoppingCart);
 	}
 
 	@Override
-	public void clearShoppingCart() {
-		itemList.clear();
+	public boolean removeItem(Item item, int idShoppingCart) {
+		return cartDao.removeItem(item, idShoppingCart);
 	}
 
 	@Override
-	public double buy(Payment paymentOption) {
+	public LinkedList<ItemBag> getItems(int idShoppingCart) {
+		return cartDao.getItemBags(idShoppingCart);
+	}
+
+	@Override
+	public double resumeTotal(int idShoppingCart) {
+		return cartDao.resumeTotalShoppingCart(idShoppingCart);
+	}
+
+	@Override
+	public boolean clearShoppingCart(int idShoppingCart) {
+		return cartDao.clearShoppingCart(idShoppingCart);
+	}
+
+	@Override
+	public double buy(Payment paymentOption, int IdShoppingCart) {
 
 		double totalPrice = 0;
-		double subtotal = resumeTotal();
+		double subtotal = resumeTotal(IdShoppingCart);
 		System.out.println("El precio a pagar es: " + subtotal);
-		
-		boolean success = paymentOption.buyNow(user, itemList, subtotal);
+
+		boolean success = true;// paymentOption.buyNow(user, itemList,
+								// subtotal);
 
 		if (!success)
 			System.out.println("La compra no puedo ser realizada por el metodo seleccionado");
@@ -82,25 +95,7 @@ public class ShoppingCartImp implements ShoppingCartAPI{
 			totalPrice = paymentOption.getAmount();
 			System.out.println("Por ende el valor final de su compra fue: " + totalPrice);
 		}
-		
+
 		return totalPrice;
-	}
-	
-	@Override
-	public String formatItems(){
-		Iterator<Item> it = itemList.iterator();
-		String itemString = null;
-		StringBuilder stringItem = new StringBuilder();
-		while (it.hasNext()) {
-			Item item = it.next();
-			stringItem.append("-");
-			stringItem.append(item.getItemDescription());
-			stringItem.append(" ........$");
-			stringItem.append(item.getItemPrice());
-			stringItem.append(System.getProperty("line.separator"));
-		}
-		itemString = stringItem.toString();
-		System.out.println(itemString);
-		return itemString;
 	}
 }

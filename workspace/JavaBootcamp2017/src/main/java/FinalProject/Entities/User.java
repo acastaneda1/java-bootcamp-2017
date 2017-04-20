@@ -1,8 +1,6 @@
 package FinalProject.Entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.*;
 
@@ -26,9 +24,6 @@ public class User implements Serializable {
 
 	@Column(name = "creditcard_number")
 	private int creditCardNumber;
-
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private List<ShoppingCart> shoppingCart = new ArrayList<ShoppingCart>();
 
 	public User() {
 
@@ -81,12 +76,5 @@ public class User implements Serializable {
 		return creditCardNumber;
 	}
 
-	public List<ShoppingCart> getShoppingCart() {
-		return shoppingCart;
-	}
-
-	public void setShoppingCart(ArrayList<ShoppingCart> newValue) {
-		this.shoppingCart = newValue;
-	}
 }
 

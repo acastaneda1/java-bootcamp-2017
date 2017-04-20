@@ -6,13 +6,17 @@ import FinalProject.Entities.User;
 
 public interface UserDAO {
 
-	public int createUser(String name, String email, String password, int creditCardNumberUser);
+	public int createUser(User user1);
 
 	public List<User> getUsers();
 
 	public User getUser(int idUser);
+	
+	public boolean logInUser(String email,String password);
+	
+	public boolean logOutUser(User user);
 
-	public void updateUser(User user);
+	public boolean updateUser(User user);
 
-	public void deleteUser(User user);
+	public boolean deleteUser(User user);
 }

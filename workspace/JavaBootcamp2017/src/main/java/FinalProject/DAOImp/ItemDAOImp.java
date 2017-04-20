@@ -2,21 +2,15 @@ package FinalProject.DAOImp;
 
 import java.util.List;
 
-import javax.persistence.*;
-
 import FinalProject.HibernateUtil;
 import FinalProject.DAO.ItemDAO;
 import FinalProject.Entities.Item;
-import FinalProject.Entities.ItemBag;
 import FinalProject.Model.Category;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import Clase6Hibernate.Entities.Course;
-import Clase6Hibernate.Entities.Teacher;
 
 public class ItemDAOImp implements ItemDAO {
 
@@ -25,14 +19,13 @@ public class ItemDAOImp implements ItemDAO {
 	}
 
 	@Override
-	public int createItem(double itemPrice, String itemName, String itemDescription, Category itemCategory, ItemBag itemBag) {
+	public int createItem(Item newItem) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
 		int idItem = 0;
 		try {
 			transaction = session.beginTransaction();
-			Item item = new Item(itemPrice, itemName, itemDescription, itemCategory);
-			item.setItemBag(itemBag);
+			Item item = new Item(newItem.getItemPrice(), newItem.getName(), newItem.getItemDescription(), newItem.getCategory());
 			idItem = (int) session.save(item);
 			transaction.commit();
 		} catch (HibernateException e) {
@@ -55,12 +48,10 @@ public class ItemDAOImp implements ItemDAO {
 			item = (Item) session.get(Item.class, new Integer(idItem));
 			if (item == null) {
 				System.out.println("There is not item with id " + idItem);
-				return null;
 			} else {
 				System.out.println("Item name: " + item.getName() + "......... $ " + item.getItemPrice());
 			}
 			transaction.commit();
-			return item;
 		} catch (HibernateException e) {
 			transaction.rollback();
 			e.printStackTrace();
@@ -95,7 +86,7 @@ public class ItemDAOImp implements ItemDAO {
 		}
 		return item;
 	}
-	
+
 	@Override
 	public List<Item> getItemByName(String name) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -121,7 +112,6 @@ public class ItemDAOImp implements ItemDAO {
 		}
 		return item;
 	}
-
 
 	@Override
 	public List<Item> getItems() {
@@ -150,15 +140,15 @@ public class ItemDAOImp implements ItemDAO {
 	}
 
 	@Override
-	public void updateItem(Item item1) {
+	public boolean updateItem(Item item1) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
+		boolean success = false;
 
 		try {
 			int idItem = item1.getItemId();
 			String name = item1.getName();
 			Category category = item1.getCategory();
-			ItemBag itembag = item1.getItemBag();
 			String description = item1.getItemDescription();
 			double price = item1.getItemPrice();
 
@@ -168,14 +158,13 @@ public class ItemDAOImp implements ItemDAO {
 				System.out.println("This item does not exist in the DB");
 			} else {
 				item.setCategory(category);
-				;
-				item.setItemBag(itembag);
 				item.setItemDescription(description);
 				item.setItemPrice(price);
 				item.setName(name);
 
 				System.out.println("Item has been updated with name: " + item.getName() + ", description: " + item.getItemDescription()
 						+ " and price: $" + item.getItemPrice() + ". The category is: " + item.getCategory());
+				success = true;
 			}
 			transaction.commit();
 
@@ -185,22 +174,26 @@ public class ItemDAOImp implements ItemDAO {
 		} finally {
 			session.close();
 		}
+		return success;
 	}
 
 	@Override
-	public void deleteItem(Item item1) {
+	public boolean deleteItem(Item item1) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
+		int idItem = 0;
+		boolean success = false;
 
 		try {
 			transaction = session.beginTransaction();
-			int idItem = item1.getItemId();
+			idItem = item1.getItemId();
 			Item item = (Item) session.get(Item.class, idItem);
 			if (item == null) {
 				System.out.println("This item does not exist in the DB");
 			} else {
 				session.delete(item);
 				System.out.println("This item has been deleted from the DB");
+				success = true;
 			}
 			transaction.commit();
 
@@ -210,6 +203,7 @@ public class ItemDAOImp implements ItemDAO {
 		} finally {
 			session.close();
 		}
+		return success;
 	}
 
 }

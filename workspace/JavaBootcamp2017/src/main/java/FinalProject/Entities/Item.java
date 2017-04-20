@@ -1,8 +1,6 @@
 package FinalProject.Entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.*;
 
@@ -28,10 +26,6 @@ public class Item implements Serializable {
 
 	@Column(name = "category")
 	private Category category;
-
-	@OneToOne(cascade = {CascadeType.ALL}, fetch=FetchType.LAZY)
-	@JoinColumn(name = "id_itembag")
-	private ItemBag itemBags;
 		
 	public Item(){
 		
@@ -74,14 +68,6 @@ public class Item implements Serializable {
 
 	public String getName() {
 		return name;
-	}
-	
-	public ItemBag getItemBag() {
-		return itemBags;
-	}
-
-	public void setItemBag(ItemBag newValue) {
-		this.itemBags = newValue;
 	}
 	
 	public Category getCategory(){

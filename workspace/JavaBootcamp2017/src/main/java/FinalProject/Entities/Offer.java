@@ -38,6 +38,10 @@ public class Offer {
 			@JoinColumn(name = "id_item") })
 	private List<Item> items = new LinkedList<Item>();
 
+	public Offer() {
+
+	}
+
 	public Offer(double offerPrice, String offerName, String offerDescription) {
 
 		this.price = offerPrice;
@@ -80,7 +84,7 @@ public class Offer {
 	public void setOfferItems(LinkedList<Item> items) {
 		this.items = items;
 	}
-	
+
 	public List<Item> getOfferItems() {
 		return this.items;
 	}

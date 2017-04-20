@@ -1,23 +1,22 @@
 package FinalProject;
 
-import java.sql.Time;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.LinkedList;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import FinalProject.DAOImp.ItemBagDAOImp;
 import FinalProject.DAOImp.ItemDAOImp;
-import FinalProject.Entities.Categories;
+import FinalProject.DAOImp.OfferDAOImp;
+import FinalProject.DAOImp.ShoppingCartDAOImp;
+import FinalProject.DAOImp.UserDAOImp;
 import FinalProject.Entities.Item;
 import FinalProject.Entities.ItemBag;
 import FinalProject.Entities.Offer;
 import FinalProject.Entities.ShoppingCart;
 import FinalProject.Entities.User;
 import FinalProject.Model.Category;
-import FinalProject.Model.State;
+
 
 
 public class MainApp {
@@ -32,33 +31,18 @@ public class MainApp {
 
 			Category category = Category.Frutas;
 			
-			User user = new User("Juan", "Juan@gmail.com", "123eds", 12345); 
-			
-			ItemBag itemBag = new ItemBag();
-			itemBag.setQuantity(2);
-			
-			ItemBag itemBag2 = new ItemBag();
-			itemBag2.setQuantity(4);
-			
-			ItemBag itemBag3 = new ItemBag();
-			itemBag3.setQuantity(12);
-			
-			ItemBag itemBag4 = new ItemBag();
-			itemBag4.setQuantity(1);
-			
 			LinkedList<ItemBag> bag = new LinkedList<ItemBag>();
 			LinkedList<Item> bagOffer = new LinkedList<Item>();
-			
-			Item item1 = new Item(12.50, "Apple", "Red", category);
-			item1.setItemBag(itemBag);
-			
-			Item item2 = new Item(12.50, "Pear", "Green", category);
-			item2.setItemBag(itemBag2);
-			
+						
 			ItemDAOImp item = new ItemDAOImp();
-			//item.createItem(10.50, "Grapes", "Purple", category, itemBag3);
-			//item.createItem(50.50, "Coconut", "Coast", category, itemBag2);
-			//Item itemExample =item.getItem(2);
+			Item item1 = new Item(10.50, "Grapes", "Purple", category);
+			Item item2 = new Item(50.50, "Coconut", "Coast", category);
+			Item item3 = new Item(12.50, "Pear", "Green", category);
+			item.createItem(item1);
+			item.createItem(item2);
+			item.createItem(item3);
+			Item itemExample =item.getItem(1);
+			Item itemExample2 =item.getItem(3);
 			//item.getItems();
 			//item.getItemByCategory(category);
 			//item.getItemByName("apple");
@@ -67,35 +51,54 @@ public class MainApp {
 			//item.updateItem(itemExample);
 			//item.deleteItem(itemExample);
 			
-			Item item4 = new Item(2.50, "Kiwi", "Green", category);
-			item4.setItemBag(itemBag4);
+			UserDAOImp user = new UserDAOImp();
+			User user1 = new User("Pedro", "pedro@pe.pe", "qwert", 12345);
+			User user2 = new User("Ana", "ana@pe.pe", "qwert", 12345);
+			user.createUser(user1);
+			user.createUser(user2);
+			User userExample = user.getUser(4);
+			//user.getUsers();
+			//userExample.setUserEmail("pe@an.pe");
+			//user.updateUser(userExample);
+			//user.deleteUser(user.getUser(1));
 			
+			ItemBagDAOImp itemBag3 = new ItemBagDAOImp();
+			itemBag3.createItemBag(2, item.getItem(3));
+			itemBag3.createItemBag(10, item.getItem(2));
+			itemBag3.createItemBag(12, item.getItem(1));
+			ItemBag itemBagExample = itemBag3.getItemBag(1);
+			ItemBag itemBagExample2 = itemBag3.getItemBag(2);
+			//itemBag3.getItembags();
+			//itemBagExample.setQuantity(3);
+			//itemBag3.updateItemBag(itemBagExample);
+			//itemBag3.deleteItemBag(itemBag3.getItemBag(4));
+			//Item item4 = new Item(2.50, "Kiwi", "Green", category);
+			//item4.setItemBag(itemBag4);
+						
+			OfferDAOImp offerDao = new OfferDAOImp();
+			bagOffer.add(itemExample);
+			bagOffer.add(itemExample2);
+			Offer offer1 = new Offer(12.00, "Pears off", "-0.50");
+			Offer offer2 = new Offer(10.00, "Grapes off", "-0.50");
+			offerDao.createOffer(offer1);
+			offerDao.createOffer(offer2);
+			Offer offerExample = offerDao.getOffer(1);
+			offerDao.getOffers();
+			//offerExample.setOfferDescription("Pears so cheap");
+			//offerDao.updateOffer(offerExample);
+			//offerDao.deleteOffer(offerExample);
 			
+			bag.add(itemBagExample);
+			bag.add(itemBagExample2);
 			
-			Offer offer = new Offer(12.00, "Pears", "-0.50");
-			bagOffer.add(item2);
-			bagOffer.add(item1);
-			offer.setOfferItems(bagOffer);
-
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			Date today = new Date();
-			String todayString = dateFormat.format(today);
-			Date lastUpdate = dateFormat.parse(todayString);
-			bag.add(itemBag);
-			bag.add(itemBag2);
-			
-			State stateCart = State.Pendiente;
-			ShoppingCart cart = new ShoppingCart(stateCart, lastUpdate);
-			cart.setItemBags(bag);
-			cart.setUser(user);
-			
-			/*session.save(user);
-			session.save(item1);
-			session.save(itemBag);
-			session.save(offer);
-			session.save(cart);*/
-			
-			
+			ShoppingCartDAOImp cartDao = new ShoppingCartDAOImp();
+			cartDao.createCart(userExample);
+			ShoppingCart shoppingCartExample = cartDao.getShoppingCart(12);
+			//shoppingCartExample.setState(State.Pagado);
+			//cartDao.updateShoppingCart(shoppingCartExample);
+			//cartDao.deleteShoppingCart(cartDao.getShoppingCart(11));
+			//cart.setItemBags(bag);
+			//cart.setUser(userExample);
 			
 			transaction.commit();
 
@@ -109,7 +112,6 @@ public class MainApp {
 				session.close();
 			}
 		}
-
 		HibernateUtil.shutdown();
 	}
 }

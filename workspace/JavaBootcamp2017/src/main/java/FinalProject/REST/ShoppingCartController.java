@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.*;
 
 import FinalProject.Services.ShoppingCartAPI;
 
-@RestController
+//@RestController
 @RequestMapping("/{cart}")
 public class ShoppingCartController {
 

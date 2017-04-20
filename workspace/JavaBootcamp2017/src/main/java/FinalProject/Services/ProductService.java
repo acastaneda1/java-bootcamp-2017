@@ -1,48 +1,74 @@
 package FinalProject.Services;
 
+import java.util.List;
+
 import FinalProject.Entities.Item;
 import FinalProject.Entities.Offer;
+import FinalProject.Model.Category;
 
 public interface ProductService {
 
 	/*
-	 * This method receive an item object and save it in DB
+	 * This method receive an item object, save it in DB and returns the id
 	 */
-	public void createItem(Item item);
+	public int createItem(Item item);
 
 	/*
 	 * This method receive an offer object and save it in DB
 	 */
-	public void createOffer(Offer offer);
+	public int createOffer(Offer offer);
 
 	/*
 	 * This method receive an item object and update it with the changes in DB
 	 */
-	public void updateItem(Item item);
+	public boolean updateItem(Item item);
 
 	/*
 	 * This method receive an offer object and update it with the changes in DB
 	 */
-	public void updateOffer(Offer offer);
+	public boolean updateOffer(Offer offer);
 
 	/*
-	 * This method receive the id of an item object and returns it 
+	 * This method receive the id of an item object and returns the object
 	 */
 	public Item getItem(int idItem);
 
 	/*
-	 * This method receive the id of an offer object and returns it 
+	 * This method returns a list of the item objects that exist on DB
 	 */
-	//public Offer getOffer(int idOffer);
+	public List<Item> getItems();
+
+	/*
+	 * This method receive the category of an item object and returns a list of
+	 * items that has this category
+	 */
+	public List<Item> getItemsByCategory(Category category);
+
+	/*
+	 * This method receive the name of an item object and returns a list of
+	 * items has that name
+	 */
+	public List<Item> getItemsByName(String name);
+
+	/*
+	 * This method receive the id of an offer object and returns it
+	 */
+	public Offer getOffer(int idOffer);
+
+	/*
+	 * This method returns a list of offer objects that exist on DB
+	 */
+	public List<Offer> getOffers();
 
 	/*
 	 * This method receive an item object and delete it from DB
 	 */
-	public void deleteItem(Item item);
+	public boolean deleteItem(Item item);
+
 	/*
 	 * This method receive an offer object and delete it from DB
 	 */
-	public void deleteOffer(Offer offer);
+	public boolean deleteOffer(Offer offer);
 
 	/*
 	 * This method create a transaction in DB

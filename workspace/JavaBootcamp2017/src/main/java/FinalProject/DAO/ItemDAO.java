@@ -3,12 +3,11 @@ package FinalProject.DAO;
 import java.util.List;
 
 import FinalProject.Entities.Item;
-import FinalProject.Entities.ItemBag;
 import FinalProject.Model.Category;
 
 public interface ItemDAO {
 
-	public int createItem(double itemPrice, String itemName, String itemDescription, Category itemCategory, ItemBag itemBag);
+	public int createItem(Item item);
 
 	public Item getItem(int idItem);
 
@@ -18,7 +17,7 @@ public interface ItemDAO {
 
 	public List<Item> getItems();
 
-	public void updateItem(Item item);
+	public boolean updateItem(Item item);
 
-	public void deleteItem(Item item);
+	public boolean deleteItem(Item item);
 }

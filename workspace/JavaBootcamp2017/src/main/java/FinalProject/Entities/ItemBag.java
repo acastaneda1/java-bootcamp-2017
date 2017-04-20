@@ -6,6 +6,8 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "item_bag")
 public class ItemBag implements Serializable {
@@ -18,14 +20,17 @@ public class ItemBag implements Serializable {
 	@Column(name = "quantity")
 	private int quantity;
 
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "itemBags", fetch = FetchType.LAZY)
+	
+	/*@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_item")*/
+	@ManyToOne( targetEntity= Item.class, fetch = FetchType.EAGER)
 	private Item item;
 
 	public ItemBag() {
 
 	}
 
-	public ItemBag(int quantity) {
+	public ItemBag(int quantity, Item item) {
 		this.quantity = quantity;
 	}
 
@@ -45,6 +50,7 @@ public class ItemBag implements Serializable {
 		return quantity;
 	}
 
+	//@JsonIgnore
 	public Item getItem() {
 		return item;
 	}

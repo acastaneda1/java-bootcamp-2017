@@ -1,14 +1,18 @@
 package FinalProject.DAO;
 
+import java.util.List;
+
 import FinalProject.Entities.Offer;
 
 public interface OfferDAO {
 
-	public void createOffer(Offer offer);
+	public int createOffer(Offer offer);
 	
-	public void updateOffer(Offer offer);
+	public Offer getOffer(int idOffer);
 	
-	//public Item getOffer(Offer idOffer);
+	public List<Offer> getOffers();
 	
-	public void deleteOffer(Offer offer);
+	public boolean updateOffer(Offer offer);
+	
+	public boolean deleteOffer(Offer offer);
 }

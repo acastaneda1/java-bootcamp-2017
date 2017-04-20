@@ -2,6 +2,7 @@ package FinalProject.Entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.*;
@@ -17,12 +18,12 @@ public class ShoppingCart implements Serializable {
 	@Column(name = "id_cart")
 	private int idShoppingCart;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL, targetEntity = ItemBag.class, fetch = FetchType.EAGER)
 	@JoinTable(name = "cart_items", joinColumns = { @JoinColumn(name = "id_cart") }, inverseJoinColumns = {
 			@JoinColumn(name = "id_itembag") })
 	private List<ItemBag> itemBags = new LinkedList<ItemBag>();
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = { CascadeType.PERSIST })
 	@JoinColumn(name = "id_user", foreignKey = @ForeignKey(name = "id_user_FK") )
 	private User user;
 
@@ -36,9 +37,10 @@ public class ShoppingCart implements Serializable {
 
 	}
 
-	public ShoppingCart(State state, Date date) {
+	public ShoppingCart(State state, Date date, User user) {
 		this.state = state;
 		this.dateLastUpdate = date;
+		this.user = user;
 	}
 
 	public int getIdShoppingCart() {
@@ -73,8 +75,46 @@ public class ShoppingCart implements Serializable {
 		this.dateLastUpdate = newValue;
 	}
 
-	public List<ItemBag> getItemBags() {
-		return itemBags;
+	public LinkedList<ItemBag> getItemBags() {
+		LinkedList<ItemBag> newBag = new LinkedList<ItemBag>();
+		for (ItemBag i : this.itemBags){
+			newBag.add(i);
+		}
+		return newBag;
+	}
+
+	public void addItem(Item item) {
+		for (ItemBag i : this.itemBags) {
+			if (i.getIdItemBag() == item.getItemId()) {
+				i.setQuantity(i.getQuantity() + 1);
+			} else {
+				this.itemBags.add(new ItemBag(1, item));
+			}
+		}
+	}
+
+	public void removeItem(Item item) {
+		for (ItemBag i : this.itemBags) {
+			if (i.getIdItemBag() == item.getItemId()) {
+				if (i.getQuantity() < 1) {
+					i.setQuantity(i.getQuantity() - 1);
+				} else {
+					this.itemBags.remove(i);
+				}
+			} else {
+				System.out.println("This item does not exist in this cart");
+			}
+		}
+	}
+	
+	public double resumeTotal() {
+		double totalPrice = 0;
+		Iterator<ItemBag> itBag = itemBags.listIterator();
+		while(itBag.hasNext()){
+			ItemBag itembag = itBag.next();
+			totalPrice = totalPrice + itembag.getItem().getItemPrice()*itembag.getQuantity();
+		}
+		return totalPrice;
 	}
 
 	public void setItemBags(LinkedList<ItemBag> newValue) {
