@@ -1,5 +1,7 @@
 package FinalProject.REST;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import javax.ws.rs.*;
@@ -16,26 +18,34 @@ import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
 
 import FinalProject.Services.ShoppingCartAPI;
+import FinalProject.Entities.ItemBag;
 
-//@RestController
-@RequestMapping("/{cart}")
+@Controller
+@RequestMapping("/cart")
 public class ShoppingCartController {
 
-	@Autowired
-	ShoppingCartAPI shoppingCart;
+	ShoppingCartAPI cartService;
 
+	@Autowired
+	public ShoppingCartController(ShoppingCartAPI cartService) {
+		this.cartService = cartService;
+	}
+	
 	ObjectMapper mapper = new ObjectMapper();
 
-	/*@RequestMapping(method = RequestMethod.GET, value = "/items", produces = MediaType.APPLICATION_JSON)
+	@RequestMapping(method = RequestMethod.GET, value = "id/{cartId}", produces = MediaType.APPLICATION_JSON_VALUE)
 
-    public ResponseEntity<?> getItems(@PathVariable("cartID") Integer id) throws JsonProcessingException {
+    public ResponseEntity<?> getItems(@PathVariable("cartId") Integer id) throws JsonProcessingException {
 		
-    	Item items = shoppingCart.containItem(id);
+    	LinkedList<ItemBag> items = cartService.getItems(id);
     	if(items == null){
-    		return new ResponseEntity("No product found for ID " + id, HttpStatus.NOT_FOUND);
-    	} else {
-    		return new ResponseEntity(items, HttpStatus.OK);
+    		return new ResponseEntity<>("No product found for ID " + id, HttpStatus.NOT_FOUND);
+    	} else { 
+    		if(items.isEmpty())
+    			return new ResponseEntity<>("The cart is empty", HttpStatus.OK);
+    		else
+    			return new ResponseEntity<>(items, HttpStatus.OK);
     	}
-	}*/
+	}
 
 }

@@ -8,6 +8,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Service;
 
 import FinalProject.HibernateUtil;
 import FinalProject.DAO.ShoppingCartDAO;
@@ -17,6 +18,7 @@ import FinalProject.Entities.ShoppingCart;
 import FinalProject.Entities.User;
 import FinalProject.Model.State;
 
+@Service
 public class ShoppingCartDAOImp implements ShoppingCartDAO {
 
 	public ShoppingCartDAOImp(){

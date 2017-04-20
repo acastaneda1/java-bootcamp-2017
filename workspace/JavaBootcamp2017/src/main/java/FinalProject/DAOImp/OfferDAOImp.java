@@ -7,13 +7,14 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Service;
 
 import FinalProject.HibernateUtil;
 import FinalProject.DAO.OfferDAO;
 import FinalProject.Entities.Item;
 import FinalProject.Entities.Offer;
 
-
+@Service
 public class OfferDAOImp implements OfferDAO {
 
 	@Override
